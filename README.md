@@ -101,9 +101,14 @@ The REST API is described below.
 ```
 ## ROADMAP 🤔
 
+- [ ] Init nestjs project
 - [ ] Create entities object (Reservation class)
 - [ ] Make API type (typescript)
 - [ ] CQRS Get Route Get list of reservation
 - [ ] CQRS Post Route Create a reservation
 - [ ] CQRS Put Make a reservation
 - [ ] CQRS Delete a reservation
+- [ ] Eslint + Prettier Github Actions
+- [ ] Dockerise application
+- [ ] a little front ?
+- [ ] Documentation
