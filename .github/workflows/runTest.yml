@@ -1,0 +1,27 @@
+name: Run test Jest
+
+on:
+  push:
+    branches:   
+      - main  
+  pull_request:
+
+jobs:
+  run-test:
+    name: Run test Jest
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+
+      - name: Install Node.js dependencies
+        run: yarn
+
+      - name: Run test
+        run: yarn run test
