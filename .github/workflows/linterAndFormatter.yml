@@ -5,6 +5,8 @@ on:
     branches:   
       - main  
       - gabrielSoudry/github-actions
+  pull_request:
+
 jobs:
   run-linters:
     name: Run linters and prettier
