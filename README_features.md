@@ -28,11 +28,14 @@ To use, follow these steps:
 Thanks to the following people who have contributed to this project:
 
 * [@Maxime Tran](https://github.com/MaxmeTrn/) 🔨
-* [@Gabriel Soudry](https://github.com/orgs/CS-DesignParLesTests/people/gabrielSoudry)
+* [@Gabriel Soudry](https://github.com/gabrielSoudry) 🔨
+* [@Jerome Petot](https://github.com/JeromePto) 🔨
+* [@Candice Rumeau](https://github.com/candylol17) 🔨
+* [@Amine Agoussal](https://github.com/AmineI) 🔨
 
 ## Contact
 
-If you want to contact me you can reach me at <maxime.tran@student-cs.fr>.
+If you want to contact me you can reach us in github
 
 ## License
 
