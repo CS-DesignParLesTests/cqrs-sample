@@ -12,7 +12,7 @@ Before you begin, ensure you have met the following requirements:
 To install, follow these steps:
 
 ```bash
-npm install
+yarn
 ```
 
 ## Using
@@ -20,13 +20,15 @@ npm install
 To use, follow these steps:
 
 ```bash
+
 ```
 
 ## Contributors
 
 Thanks to the following people who have contributed to this project:
 
-* [@Maxime Tran](https://gitlab-student.centralesupelec.fr/maxime.tran) 🔨
+* [@Maxime Tran](https://github.com/MaxmeTrn/) 🔨
+* [@Gabriel Soudry](https://github.com/orgs/CS-DesignParLesTests/people/gabrielSoudry)
 
 ## Contact
 
