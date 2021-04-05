@@ -1,1 +1,4 @@
-export class CreateBookDto {}
+export interface CreateBookDto {
+  title: string;
+  author: string;
+}
