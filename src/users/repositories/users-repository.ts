@@ -14,5 +14,4 @@ export abstract class UsersRepository {
   abstract update(payload: UpdateUserDto): Promise<User>;
 
   abstract delete(username: string): Promise<void>;
-
 }
