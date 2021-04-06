@@ -8,10 +8,7 @@ import { GetBookQuery } from './queries/implements/get.book';
 
 @Controller('book')
 export class BooksController {
-  constructor(
-    private readonly commandBus: CommandBus,
-    private readonly queryBus: QueryBus,
-  ) {}
+  constructor(private readonly commandBus: CommandBus, private readonly queryBus: QueryBus) {}
 
   @Post()
   create(@Body() createBookDto: CreateBookDto) {

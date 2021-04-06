@@ -58,9 +58,7 @@ describe('DeleteBookCommandHandler', () => {
       expect(book.title).toEqual('test_title');
 
       const commandDelete = new DeleteBookCommand('18');
-      await expect(deleteBookHandler.execute(commandDelete)).resolves.toEqual(
-        undefined,
-      );
+      await expect(deleteBookHandler.execute(commandDelete)).resolves.toEqual(undefined);
       book = await getBookHandler.execute(queryGet);
       expect(book).toBeUndefined();
     });
