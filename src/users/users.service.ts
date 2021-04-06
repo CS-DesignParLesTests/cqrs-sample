@@ -1,26 +1,34 @@
 import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
+import { CommandBus, QueryBus } from '@nestjs/cqrs';
+import { User } from './entities/user.entity';
+import { GetUserByUsernameQuery, GetUsersQuery } from './queries/implements';
+import { CreateUserCommand, RemoveUserCommand } from './commands/implements';
 
 @Injectable()
 export class UsersService {
-  create(createUserDto: CreateUserDto) {
-    return 'This action adds a new user';
+  constructor(private readonly commandBus: CommandBus, private readonly queryBus: QueryBus) {}
+
+  async create(createUserDto: CreateUserDto) {
+    return this.commandBus.execute(new CreateUserCommand(createUserDto));
   }
 
-  findAll() {
-    return `This action returns all users`;
+  async findAll(): Promise<User[]> {
+    return await this.queryBus.execute(new GetUsersQuery());
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  async findByUsername(username: string) {
+    return await this.queryBus.execute(new GetUserByUsernameQuery(username));
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+  async remove(username: string) {
+    return this.commandBus.execute(new RemoveUserCommand(username));
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
-  }
+  /* TODO : Update method
+    update(username: string, updateUserDto: UpdateUserDto) {
+      throw Error('NotImplemented');
+      return `This action updates a #${username} user`;
+    }
+*/
 }
