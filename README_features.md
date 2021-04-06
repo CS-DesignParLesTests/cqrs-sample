@@ -2,10 +2,9 @@
 
 ## Prerequisites
 
-Before you begin, ensure you have met the following requirements:
-
-* Use the latest browser available for Google Chrome or Apple Safari.
-* Compatible with Windows/MacOS/Linux.
+Before you begin with local development, ensure you have met the following tools installed :
+* NodeJS
+* Yarn 
 
 ## Installing
 
@@ -20,8 +19,10 @@ yarn
 To use, follow these steps:
 
 ```bash
-
+yarn start
 ```
+
+The Swagger API definition is then available on http://localhost:3000/api/
 
 ## Contributors
 
@@ -35,7 +36,7 @@ Thanks to the following people who have contributed to this project:
 
 ## Contact
 
-If you want to contact me you can reach us in github
+If you want to contact us you can reach us on GitHub
 
 ## License
 

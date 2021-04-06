@@ -4,8 +4,5 @@ import { CommandBus, QueryBus } from '@nestjs/cqrs';
 
 @Controller('book')
 export class BooksController {
-  constructor(
-    private readonly commandBus: CommandBus,
-    private readonly queryBus: QueryBus,
-  ) {}
+  constructor(private readonly commandBus: CommandBus, private readonly queryBus: QueryBus) {}
 }
