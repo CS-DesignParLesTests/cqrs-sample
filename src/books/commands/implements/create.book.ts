@@ -1,4 +1,4 @@
-import { CreateBookDto } from 'src/book/dto/create-book.dto';
+import { CreateBookDto } from '../../dto/create-book.dto';
 
 export class CreateBookCommand {
   constructor(public payload: CreateBookDto) {}

@@ -1,4 +1,4 @@
-import { Book } from 'src/book/entities/book.entity';
+import { Book } from '../../entities/book.entity';
 import { ListBooksQuery } from '../implements/list.books';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 import { BookRepository } from '../../repository/book-repository';
