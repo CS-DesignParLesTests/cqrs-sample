@@ -47,13 +47,13 @@ describe('CreateBookCommandHandler', () => {
   });
 
   describe('execute', () => {
-    it('Query a existing book', async () => {
+    it('Should find an existing book', async () => {
       const command = new GetBookQuery('18');
       const book = await getBookCommandHandler.execute(command);
       expect(book.author).toEqual('test_author');
       expect(book.title).toEqual('test_title');
     });
-    it('Query a non existing book', async () => {
+    it('Should not find a non existing boo', async () => {
       const command = new GetBookQuery('5');
       const book = await getBookCommandHandler.execute(command);
       expect(book).toBeUndefined();

@@ -52,7 +52,7 @@ describe('DeleteBookCommandHandler', () => {
   });
 
   describe('execute', () => {
-    it('Try to delete a book', async () => {
+    it('Should delete a book', async () => {
       const queryGet = new GetBookQuery('18');
       let book = await getBookHandler.execute(queryGet);
       expect(book.title).toEqual('test_title');

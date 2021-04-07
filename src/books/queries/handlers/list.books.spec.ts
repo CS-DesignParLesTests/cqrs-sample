@@ -46,7 +46,7 @@ describe('ListBookHandler', () => {
   });
 
   describe('execute', () => {
-    it('Query list books, should return Promise<Book[]> with the correct content', async () => {
+    it('Should return Promise<Book[]> with the correct content', async () => {
       const books = await listBooksQueryHandler.execute();
       expect(books[0].title).toEqual('test_title');
       expect(books[0].author).toEqual('test_author');

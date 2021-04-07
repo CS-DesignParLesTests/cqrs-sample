@@ -45,7 +45,7 @@ describe('CreateBookCommandHandler', () => {
   });
 
   describe('execute', () => {
-    it('Try to create books with different name and title', async () => {
+    it('Should return created books with correct name and title', async () => {
       let command = new CreateBookCommand({
         author: 'test_author',
         title: 'test_title',
