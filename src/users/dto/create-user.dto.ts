@@ -5,5 +5,5 @@ export class CreateUserDto {
   username: string;
 
   @ApiPropertyOptional()
-  displayName: string;
+  displayName?: string;
 }
