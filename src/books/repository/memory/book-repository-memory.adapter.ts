@@ -1,7 +1,9 @@
+import { Injectable } from '@nestjs/common';
 import { CreateBookDto } from '../../dto/create-book.dto';
 import { BookRepository } from '../book-repository';
 import { Book } from '../../entities/book.entity';
 
+@Injectable()
 export class BookRepositoryMemoryAdapter extends BookRepository {
   private books = [];
 
@@ -14,8 +16,7 @@ export class BookRepositoryMemoryAdapter extends BookRepository {
   }
 
   async create(id: string, payload: CreateBookDto): Promise<Book> {
-    const { title, author } = payload;
-    const newBook = new Book(id, title, author);
+    const newBook = new Book({ id, ...payload });
     this.books.push(newBook);
     return newBook;
   }

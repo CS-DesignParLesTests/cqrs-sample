@@ -11,7 +11,7 @@ import { CreateBookDto } from '../../dto/create-book.dto';
 
 export class BookRepositoryMock extends BookRepository {
   async create(id: string, payload: CreateBookDto): Promise<Book> {
-    const newBook = new Book('1', payload.title, payload.author);
+    const newBook = new Book({ id, ...payload });
     return newBook;
   }
   async findOneById(id: string): Promise<Book> {

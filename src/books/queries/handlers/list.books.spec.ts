@@ -9,7 +9,7 @@ import { Book } from '../../entities/book.entity';
 import { ListBooksHandler } from './list.books';
 
 export class BookRepositoryMock extends BookRepository {
-  book = new Book('18', 'test_title', 'test_author');
+  book = new Book({ id: '18', title: 'test_title', author: 'test_author' });
   books = [this.book];
   async create(id: string, payload: CreateBookDto): Promise<Book> {
     throw new Error('Method not implemented.');
