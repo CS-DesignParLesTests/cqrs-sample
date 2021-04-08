@@ -6,24 +6,28 @@ import { UpdateUserDto } from '../dto/update-user.dto';
 
 @Injectable()
 export class UsersRepositoryMemoryAdapter extends UsersRepository {
-  async findOneByUsername(username: string): Promise<User> {
-    throw Error('NotImplemented');
+  private users = [];
+
+  async findOneByUsername(username: string): Promise<User | undefined> {
+    return this.users.find((user: User) => user.username === username);
   }
 
   async findAll(): Promise<User[]> {
-    throw Error('NotImplemented');
+    return this.users;
   }
 
-  async create(payload: CreateUserDto): Promise<User> {
-    throw Error('NotImplemented');
+  async create(user: User): Promise<User> {
+    this.users.push(user);
+    return user;
   }
 
-  async update(payload: UpdateUserDto): Promise<User> {
+  async update(username: string, user: User): Promise<User> {
     throw Error('NotImplemented');
-    //return Promise.resolve(undefined);
+    //TODO
+    return Promise.resolve(undefined);
   }
 
   async delete(username: string): Promise<void> {
-    throw Error('NotImplemented');
+    this.users = this.users.filter((User) => username !== User.username);
   }
 }

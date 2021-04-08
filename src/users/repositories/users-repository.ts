@@ -5,13 +5,13 @@ import { UpdateUserDto } from '../dto/update-user.dto';
 
 @Injectable()
 export abstract class UsersRepository {
-  abstract findOneByUsername(username: string): Promise<User>;
+  abstract findOneByUsername(username: string): Promise<User | undefined>;
 
   abstract findAll(): Promise<User[]>;
 
-  abstract create(payload: CreateUserDto): Promise<User>;
+  abstract create(user: User): Promise<User>;
 
-  abstract update(payload: UpdateUserDto): Promise<User>;
+  abstract update(username: string, user: User): Promise<User>;
 
   abstract delete(username: string): Promise<void>;
 }
