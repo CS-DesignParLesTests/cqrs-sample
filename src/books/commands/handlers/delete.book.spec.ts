@@ -12,7 +12,7 @@ import { GetBookHandler } from '../../queries/handlers/get.book';
 import { GetBookQuery } from '../../queries/implements/get.book';
 
 export class BookRepositoryMock extends BookRepository {
-  book = new Book('18', 'test_title', 'test_author');
+  book = new Book({ id: '18', title: 'test_title', author: 'test_author' });
   books = [this.book];
   async create(id: string, payload: CreateBookDto): Promise<Book> {
     throw new Error('Method not implemented.');
