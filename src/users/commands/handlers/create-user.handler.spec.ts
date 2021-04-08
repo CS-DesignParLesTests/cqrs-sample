@@ -115,11 +115,11 @@ describe('The CreateUserHandler ', () => {
 
         it('should throw an exception if the username already exists', async () => {
           const command = new CreateUserCommand(testParameters.exists);
-          await expect(createUserHandler.execute(command)).rejects.toThrow();
+          await expect(createUserHandler.execute(command)).rejects.toThrow('User already exists');
         });
         it('should not create the user on database if the username already exists', async () => {
           const command = new CreateUserCommand(testParameters.exists);
-          await expect(createUserHandler.execute(command)).rejects.toThrow();
+          await expect(createUserHandler.execute(command)).rejects.toThrow('User already exists');
           expect(mockedUsersRepository.create).toBeCalledTimes(0);
         });
         it('should create the user on database once if the username does not already exists', async () => {
