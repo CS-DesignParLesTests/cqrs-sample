@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { UsersRepository } from '../../repositories/users-repository';
 import { User } from '../../entities/user.entity';
 import { GetUsersQuery } from '../implements';
