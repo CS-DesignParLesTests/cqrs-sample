@@ -6,10 +6,13 @@ This application aims to manage your own library at home. You can manage your bo
 ## ROADMAP
 
 * Create a super class **book**
+* Manage different **user**
 * ESLint + Prettier Github Actions
 * CQRS + TDD below features
 * Docker?
 * Front-end with available time
+* Check how to implement PostgreSQL with TypeORM and MongoDB with Mongoose
+* Generate OpenAPI Specification
 
 ### Features
 
