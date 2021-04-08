@@ -1,7 +1,9 @@
+import { Injectable } from '@nestjs/common';
 import { CreateBookDto } from '../../dto/create-book.dto';
 import { BookRepository } from '../book-repository';
 import { Book } from '../../entities/book.entity';
 
+@Injectable()
 export class BookRepositoryMemoryAdapter extends BookRepository {
   private books = [];
 
