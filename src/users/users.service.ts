@@ -3,7 +3,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { User } from './entities/user.entity';
 import { GetUserByUsernameQuery, GetUsersQuery } from './queries/implements';
-import { CreateUserCommand, RemoveUserCommand } from './commands/implements';
+import { CreateUserCommand, DeleteUserCommand } from './commands/implements';
 
 @Injectable()
 export class UsersService {
@@ -22,7 +22,7 @@ export class UsersService {
   }
 
   async remove(username: string) {
-    return this.commandBus.execute(new RemoveUserCommand(username));
+    return this.commandBus.execute(new DeleteUserCommand(username));
   }
 
   /* TODO : Update method
