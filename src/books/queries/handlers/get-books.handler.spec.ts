@@ -7,6 +7,7 @@ import { BookRepository } from '../../repository/book-repository';
 import { CreateBookDto } from '../../dto/create-book.dto';
 import { Book } from '../../entities/book.entity';
 import { GetBooksHandler } from './get-books.handler';
+import { UpdateBookDto } from 'src/books/dto/update-book.dto';
 
 export class BookRepositoryMock extends BookRepository {
   book = new Book({ id: '18', title: 'test_title', author: 'test_author' });
@@ -23,10 +24,13 @@ export class BookRepositoryMock extends BookRepository {
   async delete(id: string): Promise<void> {
     throw new Error('Method not implemented.');
   }
+  async update(id: string, payload: UpdateBookDto): Promise<void> {
+    throw new Error('Method not implemented.');
+  }
 }
 
 describe('ListBookHandler', () => {
-  let listBooksQueryHandler: GetBooksHandler;
+  let getBooksQueryHandler: GetBooksHandler;
 
   beforeEach(async () => {
     const bookRepositoryProvider: Provider[] = [
@@ -42,12 +46,12 @@ describe('ListBookHandler', () => {
     const moduleMetadata: ModuleMetadata = { providers };
     const testModule = await Test.createTestingModule(moduleMetadata).compile();
 
-    listBooksQueryHandler = testModule.get(GetBooksHandler);
+    getBooksQueryHandler = testModule.get(GetBooksHandler);
   });
 
   describe('execute', () => {
     it('Should return Promise<Book[]> with the correct content', async () => {
-      const books = await listBooksQueryHandler.execute();
+      const books = await getBooksQueryHandler.execute();
       expect(books[0].title).toEqual('test_title');
       expect(books[0].author).toEqual('test_author');
     });

@@ -8,8 +8,9 @@ import { CreateBookCommand } from '../implements/create-book.command';
 import { BookRepository } from '../../repository/book-repository';
 import { Book } from '../../entities/book.entity';
 import { CreateBookDto } from '../../dto/create-book.dto';
+import { UpdateBookDto } from 'src/books/dto/update-book.dto';
 
-export class BookRepositoryMock extends BookRepository {
+class BookRepositoryMock extends BookRepository {
   async create(id: string, payload: CreateBookDto): Promise<Book> {
     const newBook = new Book({ id, ...payload });
     return newBook;
@@ -21,6 +22,9 @@ export class BookRepositoryMock extends BookRepository {
     throw new Error('Method not implemented.');
   }
   async delete(id: string): Promise<void> {
+    throw new Error('Method not implemented.');
+  }
+  async update(id: string, payload: UpdateBookDto): Promise<void> {
     throw new Error('Method not implemented.');
   }
 }

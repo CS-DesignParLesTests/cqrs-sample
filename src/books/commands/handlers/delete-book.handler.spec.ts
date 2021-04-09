@@ -10,6 +10,7 @@ import { Book } from '../../entities/book.entity';
 import { CreateBookDto } from '../../dto/create-book.dto';
 import { GetBookHandler } from '../../queries/handlers/get-book.handler';
 import { GetBookQuery } from '../../queries/implements/get-book.query';
+import { UpdateBookDto } from 'src/books/dto/update-book.dto';
 
 export class BookRepositoryMock extends BookRepository {
   book = new Book({ id: '18', title: 'test_title', author: 'test_author' });
@@ -25,6 +26,9 @@ export class BookRepositoryMock extends BookRepository {
   }
   async delete(id: string): Promise<void> {
     this.books = this.books.filter((book) => id !== book.id);
+  }
+  async update(id: string, payload: UpdateBookDto): Promise<void> {
+    throw new Error('Method not implemented.');
   }
 }
 
