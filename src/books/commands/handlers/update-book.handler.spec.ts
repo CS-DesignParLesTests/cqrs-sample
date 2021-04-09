@@ -3,7 +3,7 @@ import { Provider } from '@nestjs/common';
 import { ModuleMetadata } from '@nestjs/common/interfaces';
 import { Test } from '@nestjs/testing';
 
-import { BookRepository } from '../../repository/book-repository';
+import { BooksRepository } from '../../repository/book-repository';
 import { Book } from '../../entities/book.entity';
 import { CreateBookDto } from '../../dto/create-book.dto';
 import { GetBookHandler } from '../../queries/handlers/get-book.handler';
@@ -12,7 +12,7 @@ import { UpdateBookDto } from 'src/books/dto/update-book.dto';
 import { UpdateBookHandler } from './update-book.handler';
 import { UpdateBookCommand } from '../implements/update-book.command';
 
-class BookRepositoryMock extends BookRepository {
+class BookRepositoryMock extends BooksRepository {
   book = new Book({ id: '18', title: 'test title', author: 'test author' });
   books = [
     this.book,
@@ -49,7 +49,7 @@ describe('UpdateBookCommandHandler', () => {
   beforeEach(async () => {
     const bookRepositoryProvider: Provider[] = [
       {
-        provide: BookRepository,
+        provide: BooksRepository,
         useClass: BookRepositoryMock,
       },
       GetBookHandler,
