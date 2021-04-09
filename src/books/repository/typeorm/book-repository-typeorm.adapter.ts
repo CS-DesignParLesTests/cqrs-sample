@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateBookDto } from '../../dto/create-book.dto';
+import { UpdateBookDto } from 'src/books/dto/update-book.dto';
 import { BooksRepository } from '../book-repository';
 import { Book } from '../../entities/book.entity';
 
@@ -31,5 +32,9 @@ export class BookRepositoryTypeOrmAdapter extends BooksRepository {
 
   async delete(id: string): Promise<void> {
     await this.booksRepository.delete(id);
+  }
+
+  async update(id: string, payload: UpdateBookDto): Promise<void> {
+    await this.booksRepository.update(id, { id, ...payload });
   }
 }
