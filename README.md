@@ -3,6 +3,10 @@
 [![Build](https://github.com/CS-DesignParLesTests/cqrs-sample/actions/workflows/build.yml/badge.svg)](https://github.com/CS-DesignParLesTests/cqrs-sample/actions/workflows/build.yml)
 [![Linter + Prettier](https://github.com/CS-DesignParLesTests/cqrs-sample/actions/workflows/linterAndFormatter.yml/badge.svg)](https://github.com/CS-DesignParLesTests/cqrs-sample/actions/workflows/linterAndFormatter.yml)
 
+[![forthebadge](https://forthebadge.com/images/badges/made-with-typescript.svg)](https://forthebadge.com)
+[![forthebadge](https://forthebadge.com/images/badges/powered-by-black-magic.svg)](https://forthebadge.com)
+[![forthebadge](https://forthebadge.com/images/badges/gluten-free.svg)](https://forthebadge.com)
+[![forthebadge](https://forthebadge.com/images/badges/powered-by-pull-requests.svg)](https://forthebadge.com)
 
 The goal is to create an application similar to [AppBubble](https://www.appbubble.co/).
 This application aims to manage your own library at home, so that you won't forget what you have !
