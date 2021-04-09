@@ -7,7 +7,7 @@ import { GetUserByUsernameHandler } from './get-user-by-username.handler';
 import { UsersRepository } from '../../repositories/users-repository';
 import { User } from '../../entities/user.entity';
 
-//Replace UsersRepositoryMemoryAdapter with a mocked class
+// Replace UsersRepositoryMemoryAdapter with a mocked class
 jest.mock('../../repositories/users-repository-memory.adapter');
 const MockedUsersRepository = UsersRepositoryMemoryAdapter;
 
@@ -15,9 +15,9 @@ describe(' ', () => {
   let getUserByUsernameHandler: GetUserByUsernameHandler;
   let mockedUsersRepository;
   beforeEach(async () => {
-    //Reset the mock instances
+    // Reset the mock instances
     mocked(MockedUsersRepository).mockClear();
-    //Provide the Mocked class as a provider for the test module
+    // Provide the Mocked class as a provider for the test module
     const providers: Provider[] = [
       {
         provide: UsersRepository,
@@ -28,9 +28,9 @@ describe(' ', () => {
     const moduleMetadata: ModuleMetadata = { providers };
     const testModule = await Test.createTestingModule(moduleMetadata).compile();
 
-    //get and save the mock instance in order to apply assertions on it later
+    // get and save the mock instance in order to apply assertions on it later
     mockedUsersRepository = mocked(MockedUsersRepository).mock.instances[0];
-    //Mock the findOneByUsername method to be a function that returns the user thanks to the given username
+    // Mock the findOneByUsername method to be a function that returns the user thanks to the given username
     mockedUsersRepository.findOneByUsername.mockImplementation((username: string) => {
       return {
         username: username,
