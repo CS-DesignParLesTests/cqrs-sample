@@ -3,20 +3,19 @@ import { Provider } from '@nestjs/common';
 import { ModuleMetadata } from '@nestjs/common/interfaces';
 import { Test } from '@nestjs/testing';
 
+import { CreateBookHandler } from './create-book.handler';
+import { CreateBookCommand } from '../implements/create-book.command';
 import { BookRepository } from '../../repository/book-repository';
-import { GetBookHandler } from './get.book';
-import { GetBookQuery } from '../implements/get.book';
-import { CreateBookDto } from '../../dto/create-book.dto';
 import { Book } from '../../entities/book.entity';
+import { CreateBookDto } from '../../dto/create-book.dto';
 
 export class BookRepositoryMock extends BookRepository {
-  book = new Book({ id: '18', title: 'test_title', author: 'test_author' });
-  books = [this.book];
   async create(id: string, payload: CreateBookDto): Promise<Book> {
-    throw new Error('Method not implemented.');
+    const newBook = new Book({ id, ...payload });
+    return newBook;
   }
   async findOneById(id: string): Promise<Book> {
-    return this.books.find((book) => book.id === id);
+    throw new Error('Method not implemented.');
   }
   async findAll(): Promise<Book[]> {
     throw new Error('Method not implemented.');
@@ -27,15 +26,14 @@ export class BookRepositoryMock extends BookRepository {
 }
 
 describe('CreateBookCommandHandler', () => {
-  let getBookCommandHandler: GetBookHandler;
-
+  let createBookCommandHandler: CreateBookHandler;
   beforeEach(async () => {
     const bookRepositoryProvider: Provider[] = [
       {
         provide: BookRepository,
         useClass: BookRepositoryMock,
       },
-      GetBookHandler,
+      CreateBookHandler,
     ];
 
     const providers: Provider[] = bookRepositoryProvider;
@@ -43,20 +41,26 @@ describe('CreateBookCommandHandler', () => {
     const moduleMetadata: ModuleMetadata = { providers };
     const testModule = await Test.createTestingModule(moduleMetadata).compile();
 
-    getBookCommandHandler = testModule.get(GetBookHandler);
+    createBookCommandHandler = testModule.get(CreateBookHandler);
   });
 
   describe('execute', () => {
-    it('Should find an existing book', async () => {
-      const command = new GetBookQuery('18');
-      const book = await getBookCommandHandler.execute(command);
-      expect(book.author).toEqual('test_author');
+    it('Should return created books with correct name and title', async () => {
+      let command = new CreateBookCommand({
+        author: 'test_author',
+        title: 'test_title',
+      });
+      let book = await createBookCommandHandler.execute(command);
       expect(book.title).toEqual('test_title');
-    });
-    it('Should not find a non existing boo', async () => {
-      const command = new GetBookQuery('5');
-      const book = await getBookCommandHandler.execute(command);
-      expect(book).toBeUndefined();
+      expect(book.author).toEqual('test_author');
+
+      command = new CreateBookCommand({
+        author: 'test_author2',
+        title: 'test_title2',
+      });
+      book = await createBookCommandHandler.execute(command);
+      expect(book.author).toEqual('test_author2');
+      expect(book.title).toEqual('test_title2');
     });
   });
 });

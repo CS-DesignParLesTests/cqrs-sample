@@ -6,7 +6,7 @@ import { Test } from '@nestjs/testing';
 import { BookRepository } from '../../repository/book-repository';
 import { CreateBookDto } from '../../dto/create-book.dto';
 import { Book } from '../../entities/book.entity';
-import { ListBooksHandler } from './list.books';
+import { ListBooksHandler } from './get-books.handler';
 
 export class BookRepositoryMock extends BookRepository {
   book = new Book({ id: '18', title: 'test_title', author: 'test_author' });

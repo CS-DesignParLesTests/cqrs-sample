@@ -1,4 +1,4 @@
-import { DeleteBookCommand } from '../implements/delete.book';
+import { DeleteBookCommand } from '../implements/delete-book.command';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { BookRepository } from '../../repository/book-repository';
 

@@ -1,10 +1,10 @@
 import { Controller, Get, Post, Body, Param, Delete } from '@nestjs/common';
 import { CreateBookDto } from './dto/create-book.dto';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
-import { CreateBookCommand } from './commands/implements/create.book';
-import { DeleteBookCommand } from './commands/implements/delete.book';
-import { ListBooksQuery } from './queries/implements/list.books';
-import { GetBookQuery } from './queries/implements/get.book';
+import { CreateBookCommand } from './commands/implements/create-book.command';
+import { DeleteBookCommand } from './commands/implements/delete-book.command';
+import { ListBooksQuery } from './queries/implements/get-books.query';
+import { GetBookQuery } from './queries/implements/get-book.query';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Book Details')

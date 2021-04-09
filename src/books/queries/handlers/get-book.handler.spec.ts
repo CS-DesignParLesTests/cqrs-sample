@@ -4,12 +4,10 @@ import { ModuleMetadata } from '@nestjs/common/interfaces';
 import { Test } from '@nestjs/testing';
 
 import { BookRepository } from '../../repository/book-repository';
-import { DeleteBookHandler } from './delete.book';
-import { DeleteBookCommand } from '../implements/delete.book';
-import { Book } from '../../entities/book.entity';
+import { GetBookHandler } from './get-book.handler';
+import { GetBookQuery } from '../implements/get-book.query';
 import { CreateBookDto } from '../../dto/create-book.dto';
-import { GetBookHandler } from '../../queries/handlers/get.book';
-import { GetBookQuery } from '../../queries/implements/get.book';
+import { Book } from '../../entities/book.entity';
 
 export class BookRepositoryMock extends BookRepository {
   book = new Book({ id: '18', title: 'test_title', author: 'test_author' });
@@ -24,13 +22,12 @@ export class BookRepositoryMock extends BookRepository {
     throw new Error('Method not implemented.');
   }
   async delete(id: string): Promise<void> {
-    this.books = this.books.filter((book) => id !== book.id);
+    throw new Error('Method not implemented.');
   }
 }
 
-describe('DeleteBookCommandHandler', () => {
-  let deleteBookHandler: DeleteBookHandler;
-  let getBookHandler: GetBookHandler;
+describe('CreateBookCommandHandler', () => {
+  let getBookCommandHandler: GetBookHandler;
 
   beforeEach(async () => {
     const bookRepositoryProvider: Provider[] = [
@@ -38,7 +35,6 @@ describe('DeleteBookCommandHandler', () => {
         provide: BookRepository,
         useClass: BookRepositoryMock,
       },
-      DeleteBookHandler,
       GetBookHandler,
     ];
 
@@ -47,19 +43,19 @@ describe('DeleteBookCommandHandler', () => {
     const moduleMetadata: ModuleMetadata = { providers };
     const testModule = await Test.createTestingModule(moduleMetadata).compile();
 
-    deleteBookHandler = testModule.get(DeleteBookHandler);
-    getBookHandler = testModule.get(GetBookHandler);
+    getBookCommandHandler = testModule.get(GetBookHandler);
   });
 
   describe('execute', () => {
-    it('Should delete a book', async () => {
-      const queryGet = new GetBookQuery('18');
-      let book = await getBookHandler.execute(queryGet);
+    it('Should find an existing book', async () => {
+      const command = new GetBookQuery('18');
+      const book = await getBookCommandHandler.execute(command);
+      expect(book.author).toEqual('test_author');
       expect(book.title).toEqual('test_title');
-
-      const commandDelete = new DeleteBookCommand('18');
-      await expect(deleteBookHandler.execute(commandDelete)).resolves.toEqual(undefined);
-      book = await getBookHandler.execute(queryGet);
+    });
+    it('Should not find a non existing boo', async () => {
+      const command = new GetBookQuery('5');
+      const book = await getBookCommandHandler.execute(command);
       expect(book).toBeUndefined();
     });
   });
