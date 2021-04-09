@@ -17,6 +17,6 @@ module.exports = {
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
-    'spaced-comment': ['warning', 'always', { 'markers': ['!', '?', 'TODO'] }],
+    'spaced-comment': ['warn', 'always', { 'markers': ['!', '?', 'TODO'] }],
   },
 };
