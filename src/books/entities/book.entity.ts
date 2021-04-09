@@ -14,6 +14,7 @@ export class Book extends AggregateRoot implements BookInterface {
   author: string;
 
   constructor(input) {
+    // need to check if input is defined because TypeOrm call the constructor without parameters
     super();
     if (input === undefined) {
       return;
