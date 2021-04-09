@@ -1,4 +1,4 @@
 import { GetBookHandler } from './handlers/get-book.handler';
-import { ListBooksHandler } from './handlers/get-books.handler';
+import { GetBooksHandler } from './handlers/get-books.handler';
 
-export const QueryHandlers = [GetBookHandler, ListBooksHandler];
+export const QueryHandlers = [GetBookHandler, GetBooksHandler];

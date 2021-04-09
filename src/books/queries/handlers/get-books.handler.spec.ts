@@ -6,7 +6,7 @@ import { Test } from '@nestjs/testing';
 import { BookRepository } from '../../repository/book-repository';
 import { CreateBookDto } from '../../dto/create-book.dto';
 import { Book } from '../../entities/book.entity';
-import { ListBooksHandler } from './get-books.handler';
+import { GetBooksHandler } from './get-books.handler';
 
 export class BookRepositoryMock extends BookRepository {
   book = new Book({ id: '18', title: 'test_title', author: 'test_author' });
@@ -26,7 +26,7 @@ export class BookRepositoryMock extends BookRepository {
 }
 
 describe('ListBookHandler', () => {
-  let listBooksQueryHandler: ListBooksHandler;
+  let listBooksQueryHandler: GetBooksHandler;
 
   beforeEach(async () => {
     const bookRepositoryProvider: Provider[] = [
@@ -34,7 +34,7 @@ describe('ListBookHandler', () => {
         provide: BookRepository,
         useClass: BookRepositoryMock,
       },
-      ListBooksHandler,
+      GetBooksHandler,
     ];
 
     const providers: Provider[] = bookRepositoryProvider;
@@ -42,7 +42,7 @@ describe('ListBookHandler', () => {
     const moduleMetadata: ModuleMetadata = { providers };
     const testModule = await Test.createTestingModule(moduleMetadata).compile();
 
-    listBooksQueryHandler = testModule.get(ListBooksHandler);
+    listBooksQueryHandler = testModule.get(GetBooksHandler);
   });
 
   describe('execute', () => {
