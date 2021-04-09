@@ -1,22 +1,18 @@
 import { Controller, Get, Post, Body, Param, Delete } from '@nestjs/common';
 import { CreateBookDto } from './dto/create-book.dto';
-import { CommandBus, QueryBus } from '@nestjs/cqrs';
-import { CreateBookCommand } from './commands/implements/create.book';
-import { DeleteBookCommand } from './commands/implements/delete.book';
-import { ListBooksQuery } from './queries/implements/list.books';
-import { GetBookQuery } from './queries/implements/get.book';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { BooksService } from './books.service';
 
-@ApiTags('Book Details')
+@ApiTags('Books Details')
 @Controller('books')
 export class BooksController {
-  constructor(private readonly commandBus: CommandBus, private readonly queryBus: QueryBus) {}
+  constructor(private readonly booksService: BooksService) {}
 
   @Post()
   @ApiResponse({ status: 201, description: 'The record has been successfully created.' })
   @ApiResponse({ status: 403, description: 'Forbidden.' })
   create(@Body() createBookDto: CreateBookDto) {
-    return this.commandBus.execute(new CreateBookCommand(createBookDto));
+    return this.booksService.create(createBookDto);
   }
 
   @Get()
@@ -26,7 +22,7 @@ export class BooksController {
   })
   @ApiResponse({ status: 403, description: 'Forbidden.' })
   findAll() {
-    return this.queryBus.execute(new ListBooksQuery());
+    return this.booksService.findAll();
   }
 
   @Get(':id')
@@ -36,12 +32,12 @@ export class BooksController {
   })
   @ApiResponse({ status: 403, description: 'Forbidden.' })
   findOne(@Param('id') id: string) {
-    return this.queryBus.execute(new GetBookQuery(id));
+    return this.booksService.find(id);
   }
 
   @Delete(':id')
   @ApiResponse({ status: 200, description: 'The resource has been deleted.' })
   remove(@Param('id') id: string) {
-    return this.commandBus.execute(new DeleteBookCommand(id));
+    return this.booksService.remove(id);
   }
 }
