@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
-import { AddBookOwnershipDto } from './dto/add-book-ownership.dto';
+import { CreateBookOwnershipDto } from './dto/create-book-ownership.dto';
 import { CreateBookOwnershipCommand, DeleteBookOwnershipCommand } from './commands/implements';
 import {
   GetBookOwnershipByUserAndIdQuery,
@@ -11,7 +11,7 @@ import {
 export class BookOwnershipsService {
   constructor(private readonly commandBus: CommandBus, private readonly queryBus: QueryBus) {}
 
-  create(username: string, createBookOwnershipDto: AddBookOwnershipDto) {
+  create(username: string, createBookOwnershipDto: CreateBookOwnershipDto) {
     return this.commandBus.execute(
       new CreateBookOwnershipCommand(username, createBookOwnershipDto),
     );

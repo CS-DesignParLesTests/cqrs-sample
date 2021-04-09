@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Body, Param, Delete } from '@nestjs/common';
 import { BookOwnershipsService } from './book-ownerships.service';
-import { AddBookOwnershipDto } from './dto/add-book-ownership.dto';
+import { CreateBookOwnershipDto } from './dto/create-book-ownership.dto';
 import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('User library')
@@ -9,7 +9,7 @@ export class BookOwnershipsController {
   constructor(private readonly bookOwnershipsService: BookOwnershipsService) {}
 
   @Post()
-  add(@Param('username') username: string, @Body() addBookOwnershipDto: AddBookOwnershipDto) {
+  add(@Param('username') username: string, @Body() addBookOwnershipDto: CreateBookOwnershipDto) {
     return this.bookOwnershipsService.create(username, addBookOwnershipDto);
   }
 
