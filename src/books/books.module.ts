@@ -5,8 +5,8 @@ import { CommandHandlers } from './commands/indexCommand';
 import { QueryHandlers } from './queries/indexQuery';
 import { CqrsModule } from '@nestjs/cqrs';
 import { BookRepositoryTypeOrmAdapter } from './repository/typeorm/book-repository-typeorm.adapter';
-import { BookRepository } from './repository/book-repository';
 import { BooksService } from './books.service';
+import { BooksRepository } from './repository/book-repository';
 import { Book } from './entities/book.entity';
 
 @Module({
@@ -15,7 +15,7 @@ import { Book } from './entities/book.entity';
   providers: [
     BooksService,
     {
-      provide: BookRepository,
+      provide: BooksRepository,
       useClass: BookRepositoryTypeOrmAdapter,
     },
     ...CommandHandlers,

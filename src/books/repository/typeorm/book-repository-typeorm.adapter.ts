@@ -2,11 +2,11 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateBookDto } from '../../dto/create-book.dto';
-import { BookRepository } from '../book-repository';
+import { BooksRepository } from '../book-repository';
 import { Book } from '../../entities/book.entity';
 
 @Injectable()
-export class BookRepositoryTypeOrmAdapter extends BookRepository {
+export class BookRepositoryTypeOrmAdapter extends BooksRepository {
   constructor(
     @InjectRepository(Book)
     private booksRepository: Repository<Book>,

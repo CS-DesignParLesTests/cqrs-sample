@@ -13,8 +13,12 @@ export class Book extends AggregateRoot implements BookInterface {
   @Column()
   author: string;
 
-  constructor({ id, title, author }) {
+  constructor(input) {
     super();
+    if (input === undefined) {
+      return;
+    }
+    const { id, title, author } = input;
     this.id = id;
     this.title = title;
     this.author = author;

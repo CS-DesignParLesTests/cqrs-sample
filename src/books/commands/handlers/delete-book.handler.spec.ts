@@ -3,16 +3,16 @@ import { Provider } from '@nestjs/common';
 import { ModuleMetadata } from '@nestjs/common/interfaces';
 import { Test } from '@nestjs/testing';
 
-import { BookRepository } from '../../repository/book-repository';
 import { DeleteBookHandler } from './delete-book.handler';
 import { DeleteBookCommand } from '../implements/delete-book.command';
+import { BooksRepository } from '../../repository/book-repository';
 import { Book } from '../../entities/book.entity';
 import { CreateBookDto } from '../../dto/create-book.dto';
 import { GetBookHandler } from '../../queries/handlers/get-book.handler';
 import { GetBookQuery } from '../../queries/implements/get-book.query';
 import { UpdateBookDto } from 'src/books/dto/update-book.dto';
 
-export class BookRepositoryMock extends BookRepository {
+export class BookRepositoryMock extends BooksRepository {
   book = new Book({ id: '18', title: 'test_title', author: 'test_author' });
   books = [this.book];
   async create(id: string, payload: CreateBookDto): Promise<Book> {
@@ -39,7 +39,7 @@ describe('DeleteBookCommandHandler', () => {
   beforeEach(async () => {
     const bookRepositoryProvider: Provider[] = [
       {
-        provide: BookRepository,
+        provide: BooksRepository,
         useClass: BookRepositoryMock,
       },
       DeleteBookHandler,
