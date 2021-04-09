@@ -5,7 +5,7 @@ import { ValidationPipe } from '@nestjs/common/pipes/validation.pipe';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  //ValidationPipe allows to enforce validation on parameters, with decorators such as "@IsEmail()"
+  // ValidationPipe allows to enforce validation on parameters, with decorators such as "@IsEmail()"
   app.useGlobalPipes(new ValidationPipe());
   const config = new DocumentBuilder()
     .setTitle('CQRS library project - TDD course')
