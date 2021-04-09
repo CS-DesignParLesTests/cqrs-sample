@@ -1,8 +1,10 @@
 import { Controller, Get, Post, Body, Param, Delete } from '@nestjs/common';
 import { BookOwnershipsService } from './book-ownerships.service';
 import { AddBookOwnershipDto } from './dto/add-book-ownership.dto';
+import { ApiTags } from '@nestjs/swagger';
 
-@Controller('users/:user/books-owned/')
+@ApiTags('User library')
+@Controller('users/:username/books-owned')
 export class BookOwnershipsController {
   constructor(private readonly bookOwnershipsService: BookOwnershipsService) {}
 
