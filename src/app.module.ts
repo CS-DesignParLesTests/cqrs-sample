@@ -6,6 +6,7 @@ import { BooksModule } from './books/books.module';
 import { UsersModule } from './users/users.module';
 import { BookOwnershipsModule } from './book-ownerships/book-ownerships.module';
 import { Book } from './books/entities/book.entity';
+import { User } from './users/entities/user.entity';
 
 @Module({
   imports: [
@@ -19,7 +20,7 @@ import { Book } from './books/entities/book.entity';
       username: 'root',
       password: 'root',
       database: 'test',
-      entities: [Book],
+      entities: [Book, User],
       synchronize: true,
     }),
   ],
