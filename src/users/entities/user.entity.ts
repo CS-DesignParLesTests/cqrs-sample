@@ -5,7 +5,7 @@ export class User extends AggregateRoot {
   public displayName: string;
 
   constructor({ username, displayName = username }) {
-    //If not provided, the display name will be replaced with a username
+    // If not provided, the display name will be replaced with a username
     super();
     this.username = username;
     this.displayName = displayName;

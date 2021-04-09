@@ -9,7 +9,7 @@ import { User } from '../../entities/user.entity';
 import { CreateUserDto } from '../../dto/create-user.dto';
 import { mocked } from 'ts-jest/utils';
 
-//Replace UsersRepositoryMemoryAdapter with a mocked class
+// Replace UsersRepositoryMemoryAdapter with a mocked class
 jest.mock('../../repositories/users-repository-memory.adapter');
 const MockedUsersRepository = UsersRepositoryMemoryAdapter;
 
@@ -28,9 +28,9 @@ describe('The CreateUserHandler ', () => {
     const moduleMetadata: ModuleMetadata = { providers };
     const testModule = await Test.createTestingModule(moduleMetadata).compile();
 
-    //get and save the mock instance in order to apply assertions on it later
+    // get and save the mock instance in order to apply assertions on it later
     mockedUsersRepository = mocked(MockedUsersRepository).mock.instances[0];
-    //Mock the create method to to be a function that returns the passed user
+    // Mock the create method to to be a function that returns the passed user
     mockedUsersRepository.create.mockImplementation((user) => user);
 
     createUserHandler = testModule.get(CreateUserHandler);
