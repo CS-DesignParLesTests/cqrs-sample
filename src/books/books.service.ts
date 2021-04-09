@@ -6,6 +6,8 @@ import { GetBooksQuery } from './queries/implements/get-books.query';
 import { GetBookQuery } from './queries/implements/get-book.query';
 import { CreateBookCommand } from './commands/implements/create-book.command';
 import { DeleteBookCommand } from './commands/implements/delete-book.command';
+import { UpdateBookDto } from './dto/update-book.dto';
+import { UpdateBookCommand } from './commands/implements/update-book.command';
 
 @Injectable()
 export class BooksService {
@@ -25,5 +27,9 @@ export class BooksService {
 
   async remove(id: string) {
     return this.commandBus.execute(new DeleteBookCommand(id));
+  }
+
+  async update(id: string, updateBookDto: UpdateBookDto) {
+    return this.commandBus.execute(new UpdateBookCommand(id, updateBookDto));
   }
 }

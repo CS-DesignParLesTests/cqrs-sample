@@ -8,6 +8,7 @@ import { GetBookHandler } from './get-book.handler';
 import { GetBookQuery } from '../implements/get-book.query';
 import { CreateBookDto } from '../../dto/create-book.dto';
 import { Book } from '../../entities/book.entity';
+import { UpdateBookDto } from 'src/books/dto/update-book.dto';
 
 export class BookRepositoryMock extends BookRepository {
   book = new Book({ id: '18', title: 'test_title', author: 'test_author' });
@@ -22,6 +23,9 @@ export class BookRepositoryMock extends BookRepository {
     throw new Error('Method not implemented.');
   }
   async delete(id: string): Promise<void> {
+    throw new Error('Method not implemented.');
+  }
+  async update(id: string, payload: UpdateBookDto): Promise<void> {
     throw new Error('Method not implemented.');
   }
 }
