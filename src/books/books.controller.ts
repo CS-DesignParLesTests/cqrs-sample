@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Put, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { CreateBookDto } from './dto/create-book.dto';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { BooksService } from './books.service';
@@ -42,7 +42,7 @@ export class BooksController {
     return this.booksService.remove(id);
   }
 
-  @Put(':id')
+  @Patch(':id')
   @ApiResponse({ status: 200, description: 'The resource has been modified.' })
   update(@Param('id') id: string, @Body() updateBookDto: UpdateBookDto) {
     return this.booksService.update(id, updateBookDto);
