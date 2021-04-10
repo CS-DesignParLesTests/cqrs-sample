@@ -4,7 +4,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './entities/user.entity';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
-@ApiTags('Users Details')
+@ApiTags('User Details')
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
