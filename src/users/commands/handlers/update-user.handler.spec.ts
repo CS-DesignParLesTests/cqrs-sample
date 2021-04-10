@@ -11,7 +11,7 @@ import { GetUserByUsernameQuery } from '../../queries/implements/get-user-by-use
 import { GetUserByUsernameHandler } from '../../queries/handlers/get-user-by-username.handler';
 import { User } from '../../entities/user.entity';
 
-//Replace UsersRepositoryMemoryAdapter with a mocked class
+// Replace UsersRepositoryMemoryAdapter with a mocked class
 jest.mock('../../repositories/memory/users-repository-memory.adapter');
 const MockedUsersRepository = UsersRepositoryMemoryAdapter;
 
@@ -24,9 +24,9 @@ describe('UpdateUserHandler', () => {
   let updateUserHandler: UpdateUserHandler, getUserHandler: GetUserByUsernameHandler;
   let mockedUsersRepository;
   beforeEach(async () => {
-    //Reset the mock instances
+    // Reset the mock instances
     mocked(MockedUsersRepository).mockClear();
-    //Provide the Mocked class as a provider for the test module
+    // Provide the Mocked class as a provider for the test module
     const providers: Provider[] = [
       {
         provide: UsersRepository,
@@ -37,9 +37,9 @@ describe('UpdateUserHandler', () => {
     ];
     const moduleMetadata: ModuleMetadata = { providers };
     const testModule = await Test.createTestingModule(moduleMetadata).compile();
-    //get and save the mock instance in order to apply assertions on it later
+    // get and save the mock instance in order to apply assertions on it later
     mockedUsersRepository = mocked(MockedUsersRepository).mock.instances[0];
-    //Mock the update and get method to to be a function that returns the passed user
+    // Mock the update and get method to to be a function that returns the passed user
     updateUserHandler = testModule.get(UpdateUserHandler);
     getUserHandler = testModule.get(GetUserByUsernameHandler);
   });

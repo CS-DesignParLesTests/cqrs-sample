@@ -7,7 +7,7 @@ import { GetUserByUsernameHandler } from './get-user-by-username.handler';
 import { UsersRepository } from '../../repositories/users-repository';
 import { User } from '../../entities/user.entity';
 
-//Replace UsersRepositoryMemoryAdapter with a mocked class
+// Replace UsersRepositoryMemoryAdapter with a mocked class
 jest.mock('../../repositories/memory/users-repository-memory.adapter');
 const MockedUsersRepository = UsersRepositoryMemoryAdapter;
 

@@ -9,7 +9,7 @@ import { User } from '../../entities/user.entity';
 import { CreateUserDto } from '../../dto/create-user.dto';
 import { mocked } from 'ts-jest/utils';
 
-//Replace UsersRepositoryMemoryAdapter with a mocked class
+// Replace UsersRepositoryMemoryAdapter with a mocked class
 jest.mock('../../repositories/memory/users-repository-memory.adapter');
 const MockedUsersRepository = UsersRepositoryMemoryAdapter;
 
