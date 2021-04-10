@@ -11,7 +11,7 @@ import { Book } from '../../entities/book.entity';
 import { UpdateBookDto } from 'src/books/dto/update-book.dto';
 
 export class BookRepositoryMock extends BooksRepository {
-  book = new Book({ id: '18', title: 'test_title', author: 'test_author' });
+  book = new Book({ id: 18, title: 'test_title', author: 'test_author' });
   books = [this.book];
   async create(id: number, payload: CreateBookDto): Promise<Book> {
     throw new Error('Method not implemented.');
@@ -52,13 +52,13 @@ describe('CreateBookCommandHandler', () => {
 
   describe('execute', () => {
     it('Should find an existing book', async () => {
-      const command = new GetBookQuery('18');
+      const command = new GetBookQuery(18);
       const book = await getBookCommandHandler.execute(command);
       expect(book.author).toEqual('test_author');
       expect(book.title).toEqual('test_title');
     });
     it('Should not find a non existing boo', async () => {
-      const command = new GetBookQuery('5');
+      const command = new GetBookQuery(5);
       const book = await getBookCommandHandler.execute(command);
       expect(book).toBeUndefined();
     });

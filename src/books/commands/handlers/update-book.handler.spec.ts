@@ -13,12 +13,12 @@ import { UpdateBookHandler } from './update-book.handler';
 import { UpdateBookCommand } from '../implements/update-book.command';
 
 class BookRepositoryMock extends BooksRepository {
-  book = new Book({ id: '18', title: 'test title', author: 'test author' });
+  book = new Book({ id: 18, title: 'test title', author: 'test author' });
   books = [
     this.book,
-    Object.assign({}, this.book, { id: '19' }),
-    Object.assign({}, this.book, { id: '20' }),
-    Object.assign({}, this.book, { id: '21' }),
+    Object.assign({}, this.book, { id: 19 }),
+    Object.assign({}, this.book, { id: 20 }),
+    Object.assign({}, this.book, { id: 21 }),
   ];
   async create(id: number, payload: CreateBookDto): Promise<Book> {
     throw new Error('Method not implemented.');
@@ -67,12 +67,12 @@ describe('UpdateBookCommandHandler', () => {
 
   describe('execute', () => {
     it('Should modify nothing', async () => {
-      const queryGet = new GetBookQuery('21');
+      const queryGet = new GetBookQuery(21);
       let book = await getBookHandler.execute(queryGet);
       expect(book.title).toEqual('test title');
       expect(book.author).toEqual('test author');
 
-      const commandUpdate = new UpdateBookCommand('23', {});
+      const commandUpdate = new UpdateBookCommand(23, {});
       await expect(updateBookHandler.execute(commandUpdate)).resolves.toEqual(undefined);
 
       book = await getBookHandler.execute(queryGet);
@@ -80,12 +80,12 @@ describe('UpdateBookCommandHandler', () => {
       expect(book.author).toEqual('test author');
     });
     it('Should modify only the author of the book', async () => {
-      const queryGet = new GetBookQuery('18');
+      const queryGet = new GetBookQuery(18);
       let book = await getBookHandler.execute(queryGet);
       expect(book.title).toEqual('test title');
       expect(book.author).toEqual('test author');
 
-      const commandUpdate = new UpdateBookCommand('18', {
+      const commandUpdate = new UpdateBookCommand(18, {
         author: 'modified author',
       });
       await expect(updateBookHandler.execute(commandUpdate)).resolves.toEqual(undefined);
@@ -95,12 +95,12 @@ describe('UpdateBookCommandHandler', () => {
       expect(book.author).toEqual('modified author');
     });
     it('Should modify only the title of the book', async () => {
-      const queryGet = new GetBookQuery('19');
+      const queryGet = new GetBookQuery(19);
       let book = await getBookHandler.execute(queryGet);
       expect(book.title).toEqual('test title');
       expect(book.author).toEqual('test author');
 
-      const commandUpdate = new UpdateBookCommand('19', {
+      const commandUpdate = new UpdateBookCommand(19, {
         title: 'modified title',
       });
       await expect(updateBookHandler.execute(commandUpdate)).resolves.toEqual(undefined);
@@ -110,12 +110,12 @@ describe('UpdateBookCommandHandler', () => {
       expect(book.author).toEqual('test author');
     });
     it('Should modify both, author and title of the book', async () => {
-      const queryGet = new GetBookQuery('20');
+      const queryGet = new GetBookQuery(20);
       let book = await getBookHandler.execute(queryGet);
       expect(book.title).toEqual('test title');
       expect(book.author).toEqual('test author');
 
-      const commandUpdate = new UpdateBookCommand('20', {
+      const commandUpdate = new UpdateBookCommand(20, {
         title: 'modified title',
         author: 'modified author',
       });
