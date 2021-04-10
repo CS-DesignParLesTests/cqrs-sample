@@ -9,15 +9,15 @@ export class CreateBookOwnershipDto {
 
   @ApiPropertyOptional()
   @IsOptional()
-  public bought?: boolean;
+  public isBought?: boolean;
 
   @ApiPropertyOptional()
   @IsOptional()
-  public signed?: boolean;
+  public isSigned?: boolean;
 
   @ApiPropertyOptional()
   @IsOptional()
-  public lent?: boolean;
+  public isLent?: boolean;
 
   @ApiPropertyOptional()
   @IsOptional()
