@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { CqrsModule } from '@nestjs/cqrs';
 import { BooksModule } from '../books/books.module';
 import { UsersModule } from '../users/users.module';
@@ -10,9 +11,10 @@ import { BookOwnershipsRepository } from './repositories/book-ownerships-reposit
 import { BookOwnershipsRepositoryMemoryAdapter } from './repositories/memory/book-ownerships-repository-memory.adapter';
 import { QueryHandlers } from './queries/handlers';
 import { CommandHandlers } from './commands/handlers';
+import { BookOwnership } from './entities/book-ownership.entity';
 
 @Module({
-  imports: [BooksModule, UsersModule, CqrsModule],
+  imports: [BooksModule, UsersModule, CqrsModule, TypeOrmModule.forFeature([BookOwnership])],
   controllers: [BookOwnershipsController],
   providers: [
     BookOwnershipsService,

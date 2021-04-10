@@ -8,6 +8,7 @@ import { UsersModule } from './users/users.module';
 import { BookOwnershipsModule } from './book-ownerships/book-ownerships.module';
 import { Book } from './books/entities/book.entity';
 import { User } from './users/entities/user.entity';
+import { BookOwnership } from './book-ownerships/entities/book-ownership.entity';
 
 @Module({
   imports: [
@@ -22,7 +23,7 @@ import { User } from './users/entities/user.entity';
       username: 'nestjs',
       password: 'nestjs',
       database: 'demonestjs',
-      entities: [Book, User],
+      entities: [Book, User, BookOwnership],
       synchronize: false,
       retryAttempts: 5,
       retryDelay: 5000,
