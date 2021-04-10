@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { CqrsModule } from '@nestjs/cqrs';
 import { UsersService } from './users.service';
 import { UsersRepository } from './repositories/users-repository';
-import { UsersRepositoryMemoryAdapter } from './repositories/users-repository-memory.adapter';
+import { UsersRepositoryMemoryAdapter } from './repositories/memory/users-repository-memory.adapter';
 import { UsersController } from './users.controller';
 import { QueryHandlers } from './queries/handlers';
 import { CommandHandlers } from './commands/handlers';

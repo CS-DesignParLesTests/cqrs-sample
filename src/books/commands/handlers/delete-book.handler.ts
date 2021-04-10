@@ -1,6 +1,6 @@
 import { DeleteBookCommand } from '../implements/delete-book.command';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { BookRepository } from '../../repository/book-repository';
+import { BookRepository } from '../../repositories/book-repository';
 
 @CommandHandler(DeleteBookCommand)
 export class DeleteBookHandler implements ICommandHandler<DeleteBookCommand> {

@@ -9,7 +9,7 @@ export class BookRepositoryMemoryAdapter extends BookRepository {
   private books = [];
 
   async findOneById(id: string): Promise<Book> {
-    return this.books.find((book) => book.id === id);
+    return this.books.find((book: Book) => book.id === id);
   }
 
   async findAll(): Promise<Book[]> {
@@ -17,13 +17,13 @@ export class BookRepositoryMemoryAdapter extends BookRepository {
   }
 
   async create(id: string, payload: CreateBookDto): Promise<Book> {
-    const newBook = new Book({ id, ...payload });
+    const newBook: Book = new Book({ id, ...payload });
     this.books.push(newBook);
     return newBook;
   }
 
   async delete(id: string): Promise<void> {
-    this.books = this.books.filter((book) => id !== book.id);
+    this.books = this.books.filter((book: Book) => id !== book.id);
   }
 
   async update(id: string, payload: UpdateBookDto): Promise<void> {

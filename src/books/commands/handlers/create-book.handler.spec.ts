@@ -5,7 +5,7 @@ import { Test } from '@nestjs/testing';
 
 import { CreateBookHandler } from './create-book.handler';
 import { CreateBookCommand } from '../implements/create-book.command';
-import { BookRepository } from '../../repository/book-repository';
+import { BookRepository } from '../../repositories/book-repository';
 import { Book } from '../../entities/book.entity';
 import { CreateBookDto } from '../../dto/create-book.dto';
 import { UpdateBookDto } from 'src/books/dto/update-book.dto';

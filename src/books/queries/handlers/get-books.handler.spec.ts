@@ -3,7 +3,7 @@ import { Provider } from '@nestjs/common';
 import { ModuleMetadata } from '@nestjs/common/interfaces';
 import { Test } from '@nestjs/testing';
 
-import { BookRepository } from '../../repository/book-repository';
+import { BookRepository } from '../../repositories/book-repository';
 import { CreateBookDto } from '../../dto/create-book.dto';
 import { Book } from '../../entities/book.entity';
 import { GetBooksHandler } from './get-books.handler';
