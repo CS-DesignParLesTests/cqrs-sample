@@ -8,12 +8,15 @@ export class CreateBookOwnershipDto {
   public bookId: string;
 
   @ApiPropertyOptional()
+  @IsOptional()
   public bought?: boolean;
 
   @ApiPropertyOptional()
+  @IsOptional()
   public signed?: boolean;
 
   @ApiPropertyOptional()
+  @IsOptional()
   public lent?: boolean;
 
   @ApiPropertyOptional()

@@ -18,23 +18,23 @@ export class BookOwnershipsController {
     return this.bookOwnershipsService.findAllByUsername(username);
   }
 
-  @Get(':id')
-  findOne(@Param('username') username: string, @Param('id') id: string) {
-    return this.bookOwnershipsService.findOneByUsernameAndId(username, id);
+  @Get(':bookId')
+  findOne(@Param('username') username: string, @Param('bookId') bookId: string) {
+    return this.bookOwnershipsService.findOneByUsernameAndId(username, bookId);
   }
 
   /*
-  @Patch(':id')
+  @Patch(':bookId')
   update(
     @Param('username') username: string,
-    @Param('id') id: string,
+    @Param('bookId') bookId: string,
     @Body() updateBookOwnershipDto: UpdateBookOwnershipDto,
   ) {
     return this.bookOwnershipsService.update(username, updateBookOwnershipDto);
   }*/
 
-  @Delete(':id')
-  remove(@Param('username') username: string, @Param('id') id: string) {
-    return this.bookOwnershipsService.remove(username, id);
+  @Delete(':bookId')
+  remove(@Param('username') username: string, @Param('bookId') bookId: string) {
+    return this.bookOwnershipsService.remove(username, bookId);
   }
 }

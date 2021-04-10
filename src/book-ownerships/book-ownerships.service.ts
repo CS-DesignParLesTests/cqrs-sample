@@ -26,8 +26,8 @@ export class BookOwnershipsService {
   }
 
   /* TODO
-  update(username: string, id: string, updateBookOwnershipDto: UpdateBookOwnershipDto) {
-    return `This action updates a #${id} bookOwnership`;
+  update(username: string, bookId: string, updateBookOwnershipDto: UpdateBookOwnershipDto) {
+    return `This action updates a #${bookId} bookOwnership`;
   }
 */
   remove(username: string, bookId: string) {

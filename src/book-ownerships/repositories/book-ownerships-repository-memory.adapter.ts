@@ -19,12 +19,12 @@ export class BookOwnershipsRepositoryMemoryAdapter extends BookOwnershipsReposit
     return this.bookOwnerships.filter((bookOwnership) => bookOwnership.username === username);
   }
 
-  async create(username: string, bookOwnership: BookOwnership): Promise<BookOwnership> {
+  async create(bookOwnership: BookOwnership): Promise<BookOwnership> {
     this.bookOwnerships.push(bookOwnership);
     return bookOwnership;
   }
 
-  async update(username: string, bookOwnership: BookOwnership): Promise<BookOwnership> {
+  async update(bookOwnership: BookOwnership): Promise<BookOwnership> {
     throw Error('NotImplemented');
     //TODO
     return Promise.resolve(undefined);

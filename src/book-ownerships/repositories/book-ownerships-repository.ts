@@ -10,9 +10,9 @@ export abstract class BookOwnershipsRepository {
 
   abstract findAllByUsername(username: string): Promise<BookOwnership[]>;
 
-  abstract create(username: string, bookOwnership: BookOwnership): Promise<BookOwnership>;
+  abstract create(bookOwnership: BookOwnership): Promise<BookOwnership>;
 
-  abstract update(username: string, bookOwnership: BookOwnership): Promise<BookOwnership>;
+  abstract update(bookOwnership: BookOwnership): Promise<BookOwnership>;
 
   abstract delete(username: string, bookId: string): Promise<void>;
 }
