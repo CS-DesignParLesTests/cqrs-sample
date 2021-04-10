@@ -1,6 +1,6 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { CreateBookCommand } from '../implements/create-book.command';
-import { BooksRepository } from '../../repository/book-repository';
+import { BooksRepository } from '../../repositories/book-repository';
 import { v4 as uuidv4 } from 'uuid';
 import { Book } from '../../entities/book.entity';
 

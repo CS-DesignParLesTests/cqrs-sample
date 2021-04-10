@@ -4,9 +4,9 @@ import { BooksController } from './books.controller';
 import { CommandHandlers } from './commands/indexCommand';
 import { QueryHandlers } from './queries/indexQuery';
 import { CqrsModule } from '@nestjs/cqrs';
-import { BookRepositoryTypeOrmAdapter } from './repository/typeorm/book-repository-typeorm.adapter';
+import { BookRepositoryTypeOrmAdapter } from './repositories/typeorm/book-repository-typeorm.adapter';
 import { BooksService } from './books.service';
-import { BooksRepository } from './repository/book-repository';
+import { BooksRepository } from './repositories/book-repository';
 import { Book } from './entities/book.entity';
 
 @Module({

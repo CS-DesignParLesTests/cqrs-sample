@@ -1,7 +1,7 @@
 import { Book } from '../../entities/book.entity';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 import { GetBookQuery } from '../implements/get-book.query';
-import { BooksRepository } from '../../repository/book-repository';
+import { BooksRepository } from '../../repositories/book-repository';
 
 @QueryHandler(GetBookQuery)
 export class GetBookHandler implements IQueryHandler<GetBookQuery> {

@@ -1,9 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { User } from './entities/user.entity';
 import { GetUserByUsernameQuery, GetUsersQuery } from './queries/implements';
-import { CreateUserCommand, DeleteUserCommand } from './commands/implements';
+import { CreateUserCommand, DeleteUserCommand, UpdateUserCommand } from './commands/implements';
 
 @Injectable()
 export class UsersService {
@@ -25,10 +26,7 @@ export class UsersService {
     return this.commandBus.execute(new DeleteUserCommand(username));
   }
 
-  /* TODO : Update method
-    update(username: string, updateUserDto: UpdateUserDto) {
-      throw Error('NotImplemented');
-      return `This action updates a #${username} user`;
-    }
-*/
+  async update(username: string, updateUserDto: UpdateUserDto) {
+    return this.commandBus.execute(new UpdateUserCommand(username, updateUserDto));
+  }
 }

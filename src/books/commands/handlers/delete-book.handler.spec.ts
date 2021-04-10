@@ -5,12 +5,12 @@ import { Test } from '@nestjs/testing';
 
 import { DeleteBookHandler } from './delete-book.handler';
 import { DeleteBookCommand } from '../implements/delete-book.command';
-import { BooksRepository } from '../../repository/book-repository';
+import { BooksRepository } from '../../repositories/book-repository';
 import { Book } from '../../entities/book.entity';
 import { CreateBookDto } from '../../dto/create-book.dto';
 import { GetBookHandler } from '../../queries/handlers/get-book.handler';
 import { GetBookQuery } from '../../queries/implements/get-book.query';
-import { UpdateBookDto } from 'src/books/dto/update-book.dto';
+import { UpdateBookDto } from '../../dto/update-book.dto';
 
 export class BookRepositoryMock extends BooksRepository {
   book = new Book({ id: '18', title: 'test_title', author: 'test_author' });

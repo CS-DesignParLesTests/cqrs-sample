@@ -2,7 +2,7 @@ import { Provider } from '@nestjs/common';
 import { ModuleMetadata } from '@nestjs/common/interfaces';
 import { Test } from '@nestjs/testing';
 import { mocked } from 'ts-jest/utils';
-import { UsersRepositoryMemoryAdapter } from '../../repositories/users-repository-memory.adapter';
+import { UsersRepositoryMemoryAdapter } from '../../repositories/memory/users-repository-memory.adapter';
 import { UsersRepository } from '../../repositories/users-repository';
 import { DeleteUserHandler } from './delete-user.handler';
 import { DeleteUserCommand } from '../implements';
@@ -13,7 +13,7 @@ jest.mock('../../repositories/users-repository-memory.adapter');
 const MockedUsersRepository = UsersRepositoryMemoryAdapter;
 
 describe('DeleteUserHandler', () => {
-  let removeUserHandler: DeleteUserHandler;
+  let deleteUserHandler: DeleteUserHandler;
   let mockedUsersRepository;
   beforeEach(async () => {
     // Reset the mock instances
@@ -33,7 +33,7 @@ describe('DeleteUserHandler', () => {
     mockedUsersRepository = mocked(MockedUsersRepository).mock.instances[0];
     // Mock the create method to to be a function that returns the passed user
 
-    removeUserHandler = testModule.get(DeleteUserHandler);
+    deleteUserHandler = testModule.get(DeleteUserHandler);
   });
   describe('execute', function () {
     describe.each([
@@ -50,16 +50,16 @@ describe('DeleteUserHandler', () => {
       });
       it('should call the remove method on the repository for the correct User', async () => {
         const command = new DeleteUserCommand(testParameters.exists);
-        await removeUserHandler.execute(command);
+        await deleteUserHandler.execute(command);
         expect(mockedUsersRepository.delete).toHaveBeenCalledWith(testParameters.exists);
       });
       it('should throw an error if the user did not already exist', async () => {
         const command = new DeleteUserCommand(testParameters.doesNotExist);
-        await expect(removeUserHandler.execute(command)).rejects.toThrow('User does not exist');
+        await expect(deleteUserHandler.execute(command)).rejects.toThrow('User does not exist');
       });
       it('should not call the repository delete method if the user did not already exist', async () => {
         const command = new DeleteUserCommand(testParameters.doesNotExist);
-        await expect(removeUserHandler.execute(command)).rejects.toThrow('User does not exist');
+        await expect(deleteUserHandler.execute(command)).rejects.toThrow('User does not exist');
         expect(mockedUsersRepository.delete).toHaveBeenCalledTimes(0);
       });
     });

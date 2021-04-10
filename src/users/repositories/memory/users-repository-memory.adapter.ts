@@ -1,6 +1,7 @@
-import { UsersRepository } from './users-repository';
-import { User } from '../entities/user.entity';
+import { UsersRepository } from './../users-repository';
+import { User } from '../../entities/user.entity';
 import { Injectable } from '@nestjs/common';
+import { UpdateUserDto } from '../../dto/update-user.dto';
 
 @Injectable()
 export class UsersRepositoryMemoryAdapter extends UsersRepository {
@@ -19,10 +20,13 @@ export class UsersRepositoryMemoryAdapter extends UsersRepository {
     return user;
   }
 
-  async update(username: string, user: User): Promise<User> {
-    throw Error('NotImplemented');
-    //TODO
-    return Promise.resolve(undefined);
+  async update(username: string, payload: UpdateUserDto): Promise<void> {
+    this.users = this.users.map((user) => {
+      if (user.username === username) {
+        return Object.assign(user, payload);
+      }
+      return user;
+    });
   }
 
   async delete(username: string): Promise<void> {
