@@ -1,20 +1,22 @@
 import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { BooksController } from './books.controller';
 import { CommandHandlers } from './commands/indexCommand';
 import { QueryHandlers } from './queries/indexQuery';
 import { CqrsModule } from '@nestjs/cqrs';
-import { BookRepositoryMemoryAdapter } from './repository/memory/book-repository-memory.adapter';
-import { BookRepository } from './repository/book-repository';
+import { BookRepositoryTypeOrmAdapter } from './repository/typeorm/book-repository-typeorm.adapter';
 import { BooksService } from './books.service';
+import { BooksRepository } from './repository/book-repository';
+import { Book } from './entities/book.entity';
 
 @Module({
-  imports: [CqrsModule],
+  imports: [CqrsModule, TypeOrmModule.forFeature([Book])],
   controllers: [BooksController],
   providers: [
     BooksService,
     {
-      provide: BookRepository,
-      useClass: BookRepositoryMemoryAdapter,
+      provide: BooksRepository,
+      useClass: BookRepositoryTypeOrmAdapter,
     },
     ...CommandHandlers,
     ...QueryHandlers,

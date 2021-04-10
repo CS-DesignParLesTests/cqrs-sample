@@ -2,7 +2,7 @@ import { Book } from '../entities/book.entity';
 import { CreateBookDto } from '../dto/create-book.dto';
 import { UpdateBookDto } from '../dto/update-book.dto';
 
-export abstract class BookRepository {
+export abstract class BooksRepository {
   abstract findOneById(id: string): Promise<Book>;
   abstract findAll(): Promise<Book[]>;
 
