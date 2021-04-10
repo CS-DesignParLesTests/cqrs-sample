@@ -27,7 +27,7 @@ export class UsersRepositoryTypeOrmAdapter extends UsersRepository {
   }
 
   async update(username: string, payload: UpdateUserDto): Promise<void> {
-    await this.usersRepository.update(username, { username, ...payload });
+    await this.usersRepository.update(username, payload);
   }
   async delete(username: string): Promise<void> {
     // this.users = this.users.filter((User) => username !== User.username);
