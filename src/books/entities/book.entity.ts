@@ -4,8 +4,8 @@ import { Entity, Column, PrimaryColumn } from 'typeorm';
 
 @Entity()
 export class Book extends AggregateRoot implements BookInterface {
-  @PrimaryColumn()
-  id: string;
+  @PrimaryColumn({ type: 'int' })
+  id: number;
 
   @Column()
   title: string;

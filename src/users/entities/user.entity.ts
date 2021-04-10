@@ -3,10 +3,10 @@ import { Entity, Column, PrimaryColumn } from 'typeorm';
 
 @Entity()
 export class User extends AggregateRoot {
-  @PrimaryColumn()
+  @PrimaryColumn({ type: 'varchar', length: '30' })
   public username: string;
 
-  @Column()
+  @Column({ type: 'varchar', length: '30', unique: true })
   public displayName: string;
 
   constructor(input) {

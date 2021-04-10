@@ -20,19 +20,19 @@ class BookRepositoryMock extends BooksRepository {
     Object.assign({}, this.book, { id: '20' }),
     Object.assign({}, this.book, { id: '21' }),
   ];
-  async create(id: string, payload: CreateBookDto): Promise<Book> {
+  async create(id: number, payload: CreateBookDto): Promise<Book> {
     throw new Error('Method not implemented.');
   }
-  async findOneById(id: string): Promise<Book> {
+  async findOneById(id: number): Promise<Book> {
     return this.books.find((book) => book.id === id);
   }
   async findAll(): Promise<Book[]> {
     throw new Error('Method not implemented.');
   }
-  async delete(id: string): Promise<void> {
+  async delete(id: number): Promise<void> {
     throw new Error('Method not implemented.');
   }
-  async update(id: string, payload: UpdateBookDto): Promise<void> {
+  async update(id: number, payload: UpdateBookDto): Promise<void> {
     this.books = this.books.map((book) => {
       if (book.id === id) {
         return Object.assign(book, payload);

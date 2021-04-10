@@ -11,20 +11,20 @@ import { CreateBookDto } from '../../dto/create-book.dto';
 import { UpdateBookDto } from 'src/books/dto/update-book.dto';
 
 export class BookRepositoryMock extends BooksRepository {
-  async create(id: string, payload: CreateBookDto): Promise<Book> {
+  async create(id: number, payload: CreateBookDto): Promise<Book> {
     const newBook = new Book({ id, ...payload });
     return newBook;
   }
-  async findOneById(id: string): Promise<Book> {
+  async findOneById(id: number): Promise<Book> {
     throw new Error('Method not implemented.');
   }
   async findAll(): Promise<Book[]> {
     throw new Error('Method not implemented.');
   }
-  async delete(id: string): Promise<void> {
+  async delete(id: number): Promise<void> {
     throw new Error('Method not implemented.');
   }
-  async update(id: string, payload: UpdateBookDto): Promise<void> {
+  async update(id: number, payload: UpdateBookDto): Promise<void> {
     throw new Error('Method not implemented.');
   }
 }

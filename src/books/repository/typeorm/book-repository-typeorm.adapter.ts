@@ -15,7 +15,7 @@ export class BookRepositoryTypeOrmAdapter extends BooksRepository {
     super();
   }
 
-  async findOneById(id: string): Promise<Book> {
+  async findOneById(id: number): Promise<Book> {
     return this.booksRepository.findOne(id);
   }
 
@@ -23,18 +23,18 @@ export class BookRepositoryTypeOrmAdapter extends BooksRepository {
     return this.booksRepository.find();
   }
 
-  async create(id: string, payload: CreateBookDto): Promise<Book> {
+  async create(id: number, payload: CreateBookDto): Promise<Book> {
     return this.booksRepository.save({
       id,
       ...payload,
     });
   }
 
-  async delete(id: string): Promise<void> {
+  async delete(id: number): Promise<void> {
     await this.booksRepository.delete(id);
   }
 
-  async update(id: string, payload: UpdateBookDto): Promise<void> {
+  async update(id: number, payload: UpdateBookDto): Promise<void> {
     await this.booksRepository.update(id, { id, ...payload });
   }
 }
