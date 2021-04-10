@@ -21,7 +21,7 @@ import { User } from './users/entities/user.entity';
       password: 'nestjs',
       database: 'demonestjs',
       entities: [Book, User],
-      synchronize: true,
+      synchronize: false,
       retryAttempts: 5,
       retryDelay: 5000,
     }),
