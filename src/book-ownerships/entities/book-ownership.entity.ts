@@ -21,9 +21,9 @@ export class BookOwnership extends AggregateRoot {
     ({
       username: this.username,
       bookId: this.bookId,
-      bought: this.isBought,
-      signed: this.isSigned,
-      lent: this.isLent,
+      isBought: this.isBought,
+      isSigned: this.isSigned,
+      isLent: this.isLent,
       dateAcquired: this.dateAcquired,
       dateRead: this.dateRead,
     } = input);
