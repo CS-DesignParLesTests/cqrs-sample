@@ -8,8 +8,8 @@ import { DeleteUserHandler } from './delete-user.handler';
 import { DeleteUserCommand } from '../implements';
 import { User } from '../../entities/user.entity';
 
-// Replace UsersRepositoryMemoryAdapter with a mocked class
-jest.mock('../../repositories/users-repository-memory.adapter');
+//Replace UsersRepositoryMemoryAdapter with a mocked class
+jest.mock('../../repositories/memory/users-repository-memory.adapter');
 const MockedUsersRepository = UsersRepositoryMemoryAdapter;
 
 describe('DeleteUserHandler', () => {
