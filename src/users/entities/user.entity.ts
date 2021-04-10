@@ -6,7 +6,7 @@ export class User extends AggregateRoot {
   @PrimaryColumn({ type: 'varchar', length: '30' })
   public username: string;
 
-  @Column({ type: 'varchar', length: '30', unique: true })
+  @Column({ type: 'varchar', length: '30' })
   public displayName: string;
 
   constructor(input) {

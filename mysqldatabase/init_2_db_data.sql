@@ -7,7 +7,7 @@ DROP TABLE IF EXISTS book_ownership;
 CREATE TABLE user
 (
     username VARCHAR(30) PRIMARY KEY,
-    displayname VARCHAR(30) NOT NULL UNIQUE
+    displayname VARCHAR(30) NOT NULL
 );
 
 CREATE TABLE book
