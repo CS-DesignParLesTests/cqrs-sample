@@ -6,6 +6,7 @@ import { GetUsersHandler } from './get-users.handler';
 import { Provider } from '@nestjs/common';
 import { ModuleMetadata } from '@nestjs/common/interfaces';
 import { Test } from '@nestjs/testing';
+import { UpdateUserDto } from 'src/users/dto/update-user.dto';
 
 class UsersRepositoryMock extends UsersRepository {
   user1 = new User({ username: 'candylol', displayName: 'Candice' });
@@ -28,7 +29,7 @@ class UsersRepositoryMock extends UsersRepository {
     throw new Error('Method not implemented.');
   }
 
-  update(username: string, user: User): Promise<User> {
+  update(username: string, payload: UpdateUserDto): Promise<void> {
     throw new Error('Method not implemented.');
   }
 }

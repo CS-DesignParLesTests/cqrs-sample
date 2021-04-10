@@ -2,13 +2,13 @@ import { Provider } from '@nestjs/common';
 import { ModuleMetadata } from '@nestjs/common/interfaces';
 import { Test } from '@nestjs/testing';
 import { mocked } from 'ts-jest/utils';
-import { UsersRepositoryMemoryAdapter } from '../../repositories/users-repository-memory.adapter';
+import { UsersRepositoryMemoryAdapter } from '../../repositories/memory/users-repository-memory.adapter';
 import { GetUserByUsernameHandler } from './get-user-by-username.handler';
 import { UsersRepository } from '../../repositories/users-repository';
 import { User } from '../../entities/user.entity';
 
 //Replace UsersRepositoryMemoryAdapter with a mocked class
-jest.mock('../../repositories/users-repository-memory.adapter');
+jest.mock('../../repositories/memory/users-repository-memory.adapter');
 const MockedUsersRepository = UsersRepositoryMemoryAdapter;
 
 describe(' ', () => {
