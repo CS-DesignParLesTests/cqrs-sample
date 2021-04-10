@@ -6,9 +6,9 @@ export class BookOwnership extends AggregateRoot {
   public username: string;
   public bookId: string;
 
-  public bought = true;
-  public signed = false;
-  public lent = false;
+  public isBought = true;
+  public isSigned = false;
+  public isLent = false;
 
   public dateAcquired: Date | undefined;
   public dateRead: Date | undefined;
@@ -21,9 +21,9 @@ export class BookOwnership extends AggregateRoot {
     ({
       username: this.username,
       bookId: this.bookId,
-      bought: this.bought,
-      signed: this.signed,
-      lent: this.lent,
+      bought: this.isBought,
+      signed: this.isSigned,
+      lent: this.isLent,
       dateAcquired: this.dateAcquired,
       dateRead: this.dateRead,
     } = input);
