@@ -21,11 +21,10 @@ services:
           - database
 
   app:
-    build:
-      context: .
-      target: development
+    image: node:15.14-alpine
+    working_dir: /usr/src/app
     # Restart automatically docker on any file change
-    command: yarn run start:dev
+    command: sh -c "yarn && yarn run start:dev"
     volumes:
       # Mount a volume which will change each file changed locally
       - .:/usr/src/app
