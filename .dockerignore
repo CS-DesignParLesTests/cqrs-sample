@@ -1,0 +1,9 @@
+### Default excludes ###
+
+.github
+node_modules
+*.log
+
+### Other docker directories ###
+
+mysqldatabase

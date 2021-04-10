@@ -1,11 +1,44 @@
-version: "3"
+version: "3.8"
 
 services:
   mysql:
-    image: mysql:5
+    build: mysqldatabase
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: test
+      MYSQL_USER: nestjs
+      MYSQL_PASSWORD: nestjs
+      MYSQL_DATABASE: demonestjs
     ports:
-      - "3306:3306"
+      # Expose port 3307 on host machine in order to avoid collision with another MySQL instance running on host machine
+      - "3307:3306"
+    volumes:
+      # Persist data between container invocation
+      - "dbdata:/var/lib/mysqldocker/data"
+    networks:
+      netwdevnestjs:
+        aliases:
+          - database
+
+  app:
+    build:
+      context: .
+      target: development
+    # Restart automatically docker on any file change
+    command: yarn run start:dev
+    volumes:
+      # Mount a volume which will change each file changed locally
+      - .:/usr/src/app
+      # Mount an anonymous volume to keep node_modules from being overriden by local changes
+      - /usr/src/app/node_modules
+    ports:
+      - "3000:3000"
+    networks:
+      - netwdevnestjs
+    depends_on:
+      - mysql
+
+networks:
+  netwdevnestjs:
+volumes:
+  dbdata:
