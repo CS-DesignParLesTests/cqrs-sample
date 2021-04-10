@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { UsersRepositoryMemoryAdapter } from './users-repository-memory.adapter';
-import { UsersRepository } from './users-repository';
+import { UsersRepository } from '../users-repository';
 
 describe('UsersRepository', () => {
   let repository: UsersRepository;

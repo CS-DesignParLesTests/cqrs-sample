@@ -3,14 +3,14 @@ import { ModuleMetadata } from '@nestjs/common/interfaces';
 import { Test } from '@nestjs/testing';
 import { CreateUserHandler } from './create-user.handler';
 import { UsersRepository } from '../../repositories/users-repository';
-import { UsersRepositoryMemoryAdapter } from '../../repositories/users-repository-memory.adapter';
+import { UsersRepositoryMemoryAdapter } from '../../repositories/memory/users-repository-memory.adapter';
 import { CreateUserCommand } from '../implements';
 import { User } from '../../entities/user.entity';
 import { CreateUserDto } from '../../dto/create-user.dto';
 import { mocked } from 'ts-jest/utils';
 
 // Replace UsersRepositoryMemoryAdapter with a mocked class
-jest.mock('../../repositories/users-repository-memory.adapter');
+jest.mock('../../repositories/memory/users-repository-memory.adapter');
 const MockedUsersRepository = UsersRepositoryMemoryAdapter;
 
 describe('The CreateUserHandler ', () => {

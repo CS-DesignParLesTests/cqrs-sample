@@ -5,10 +5,10 @@ import { Test } from '@nestjs/testing';
 
 import { CreateBookHandler } from './create-book.handler';
 import { CreateBookCommand } from '../implements/create-book.command';
-import { BooksRepository } from '../../repository/book-repository';
+import { BooksRepository } from '../../repositories/book-repository';
 import { Book } from '../../entities/book.entity';
 import { CreateBookDto } from '../../dto/create-book.dto';
-import { UpdateBookDto } from 'src/books/dto/update-book.dto';
+import { UpdateBookDto } from '../../dto/update-book.dto';
 
 export class BookRepositoryMock extends BooksRepository {
   async create(id: string, payload: CreateBookDto): Promise<Book> {

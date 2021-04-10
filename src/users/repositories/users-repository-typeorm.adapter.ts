@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UsersRepository } from './users-repository';
 import { User } from '../entities/user.entity';
+import { UpdateUserDto } from '../dto/update-user.dto';
 
 @Injectable()
 export class UsersRepositoryTypeOrmAdapter extends UsersRepository {
@@ -25,10 +26,9 @@ export class UsersRepositoryTypeOrmAdapter extends UsersRepository {
     return this.usersRepository.save(user);
   }
 
-  async update(username: string, user: User): Promise<User> {
-    throw Error('NotImplemented');
+  async update(username: string, payload: UpdateUserDto): Promise<void> {
+    await this.usersRepository.update(username, payload);
   }
-
   async delete(username: string): Promise<void> {
     // this.users = this.users.filter((User) => username !== User.username);
     await this.usersRepository.delete(username);

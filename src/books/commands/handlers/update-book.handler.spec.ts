@@ -3,12 +3,12 @@ import { Provider } from '@nestjs/common';
 import { ModuleMetadata } from '@nestjs/common/interfaces';
 import { Test } from '@nestjs/testing';
 
-import { BooksRepository } from '../../repository/book-repository';
+import { BooksRepository } from '../../repositories/book-repository';
 import { Book } from '../../entities/book.entity';
 import { CreateBookDto } from '../../dto/create-book.dto';
 import { GetBookHandler } from '../../queries/handlers/get-book.handler';
 import { GetBookQuery } from '../../queries/implements/get-book.query';
-import { UpdateBookDto } from 'src/books/dto/update-book.dto';
+import { UpdateBookDto } from '../../dto/update-book.dto';
 import { UpdateBookHandler } from './update-book.handler';
 import { UpdateBookCommand } from '../implements/update-book.command';
 
