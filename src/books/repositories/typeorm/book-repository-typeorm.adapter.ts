@@ -35,6 +35,6 @@ export class BookRepositoryTypeOrmAdapter extends BooksRepository {
   }
 
   async update(id: string, payload: UpdateBookDto): Promise<void> {
-    await this.booksRepository.update(id, { id, ...payload });
+    await this.booksRepository.update(id, payload);
   }
 }
