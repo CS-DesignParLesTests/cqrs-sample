@@ -9,7 +9,7 @@ describe('Repository Memory Adapter', () => {
     title: 'title test',
     author: 'author test',
   };
-  const bookId = 11;
+  const bookId = 'sq3135g4sqg';
 
   beforeEach(() => {
     repository = new BookRepositoryMemoryAdapter();
