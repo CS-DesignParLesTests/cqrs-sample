@@ -1,5 +1,5 @@
 import { IQuery } from '@nestjs/cqrs';
 
 export class GetBookQuery implements IQuery {
-  constructor(public id: number) {}
+  constructor(public id: string) {}
 }

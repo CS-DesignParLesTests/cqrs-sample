@@ -21,15 +21,15 @@ export class BooksService {
     return this.queryBus.execute(new GetBooksQuery());
   }
 
-  async find(id: number) {
+  async find(id: string) {
     return await this.queryBus.execute(new GetBookQuery(id));
   }
 
-  async remove(id: number) {
+  async remove(id: string) {
     return this.commandBus.execute(new DeleteBookCommand(id));
   }
 
-  async update(id: number, updateBookDto: UpdateBookDto) {
+  async update(id: string, updateBookDto: UpdateBookDto) {
     return this.commandBus.execute(new UpdateBookCommand(id, updateBookDto));
   }
 }

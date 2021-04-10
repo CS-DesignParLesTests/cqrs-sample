@@ -8,7 +8,7 @@ import { UpdateBookDto } from 'src/books/dto/update-book.dto';
 export class BookRepositoryMemoryAdapter extends BooksRepository {
   private books = [];
 
-  async findOneById(id: number): Promise<Book> {
+  async findOneById(id: string): Promise<Book> {
     return this.books.find((book) => book.id === id);
   }
 
@@ -16,17 +16,17 @@ export class BookRepositoryMemoryAdapter extends BooksRepository {
     return this.books;
   }
 
-  async create(id: number, payload: CreateBookDto): Promise<Book> {
+  async create(id: string, payload: CreateBookDto): Promise<Book> {
     const newBook = new Book({ id, ...payload });
     this.books.push(newBook);
     return newBook;
   }
 
-  async delete(id: number): Promise<void> {
+  async delete(id: string): Promise<void> {
     this.books = this.books.filter((book) => id !== book.id);
   }
 
-  async update(id: number, payload: UpdateBookDto): Promise<void> {
+  async update(id: string, payload: UpdateBookDto): Promise<void> {
     this.books = this.books.map((book) => {
       if (book.id === id) {
         return Object.assign(book, payload);

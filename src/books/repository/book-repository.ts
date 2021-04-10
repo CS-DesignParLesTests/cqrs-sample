@@ -3,10 +3,10 @@ import { CreateBookDto } from '../dto/create-book.dto';
 import { UpdateBookDto } from '../dto/update-book.dto';
 
 export abstract class BooksRepository {
-  abstract findOneById(id: number): Promise<Book>;
+  abstract findOneById(id: string): Promise<Book>;
   abstract findAll(): Promise<Book[]>;
 
-  abstract create(id: number, payload: CreateBookDto): Promise<Book>;
-  abstract delete(id: number): Promise<void>;
-  abstract update(id: number, payload: UpdateBookDto): Promise<void>;
+  abstract create(id: string, payload: CreateBookDto): Promise<Book>;
+  abstract delete(id: string): Promise<void>;
+  abstract update(id: string, payload: UpdateBookDto): Promise<void>;
 }
