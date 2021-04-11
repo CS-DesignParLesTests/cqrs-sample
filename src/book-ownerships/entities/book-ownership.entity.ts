@@ -1,11 +1,9 @@
-import { Book } from '../../books/entities/book.entity';
 import { AggregateRoot } from '@nestjs/cqrs';
 
-//TODO Implement BookInterface to apply decorator pattern ?
+//TODO Implement BookInterface to apply decorator pattern and store the book instance ?
 export class BookOwnership extends AggregateRoot {
   public username: string;
 
-  //TODO Store book instance instead ?
   public bookId: string;
 
   public isBought: boolean;
