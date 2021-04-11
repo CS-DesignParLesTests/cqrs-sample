@@ -46,7 +46,9 @@ export class UsersController {
 
   @Post()
   @ApiResponse({ status: 200, description: 'The user has been successfully updated.' })
-  @ApiResponse({ status: 201, description: 'The user has been successfully created.',
+  @ApiResponse({
+    status: 201,
+    description: 'The user has been successfully created.',
     schema: { $ref: '#/components/schemas/User' },
   })
   @ApiResponse({
