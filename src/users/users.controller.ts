@@ -46,7 +46,9 @@ export class UsersController {
 
   @Post()
   @ApiResponse({ status: 200, description: 'The user has been successfully updated.' })
-  @ApiResponse({ status: 201, description: 'The user has been successfully created.' })
+  @ApiResponse({ status: 201, description: 'The user has been successfully created.',
+    schema: { $ref: '#/components/schemas/User' },
+  })
   @ApiResponse({
     status: 400,
     description: 'Bad Request. User ID must be a string to uuid format.',
