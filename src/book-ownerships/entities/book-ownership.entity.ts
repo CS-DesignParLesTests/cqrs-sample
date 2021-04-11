@@ -35,10 +35,15 @@ export class BookOwnership extends AggregateRoot {
 
   @ApiProperty({
     description: `Indicates the acquisition date of the book by the user`,
-    type: 'date',
-    format: ' date-time',
+    type: 'string',
+    format: 'date-time',
   })
   public dateAcquired: Date | undefined;
+  @ApiProperty({
+    description: `Indicates the read date of the book by the user`,
+    type: 'string',
+    format: 'date-time',
+  })
   public dateRead: Date | undefined;
 
   constructor(input) {
