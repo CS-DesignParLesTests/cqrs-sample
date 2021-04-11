@@ -33,11 +33,37 @@ export class BookRepositoryTypeOrmAdapter
   }
 
   async findOneById(id: string): Promise<Book> {
-    return this.booksRepository.findOne(id);
+    // return this.booksRepository.findOne(id);
+    const document: BookMongoDocument = await this.bookModel.findOne({ id: id }).exec();
+    return new Book(document.toObject());
   }
 
   async findAll(): Promise<Book[]> {
-    return this.booksRepository.find();
+    // return this.booksRepository.find();
+
+    // Je crois que je me suis perdu, help pour reecrire acev async/await
+    // return new Promise((resolve, reject) => {
+    //   this.bookModel
+    //     .find({})
+    //     .exec()
+    //     .then((value: BookMongoDocument[]) => {
+    //       const tmp: Book[] = [];
+    //       for (let index = 0; index < value.length; index++) {
+    //         tmp[index] = new Book(value[index].toObject());
+    //       }
+    //       resolve(tmp);
+    //     })
+    //     .catch((error) => {
+    //       reject(error);
+    //     });
+    // });
+
+    const documents: BookMongoDocument[] = await this.bookModel.find({}).exec();
+    const output: Book[] = [];
+    for (let index = 0; index < documents.length; index++) {
+      output[index] = new Book(documents[index].toObject());
+    }
+    return output;
   }
 
   async create(id: string, payload: CreateBookDto): Promise<Book> {
