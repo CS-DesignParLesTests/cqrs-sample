@@ -21,7 +21,7 @@ export class BookOwnershipsController {
   @ApiResponse({
     status: 404,
     description:
-      'Bad Request. A BookOwnership ID with the specified book ID was not found for the specified username. Book ID must be a string to uuid format and username must be a string.',
+      'Bad Request. A BookOwnership with the specified book ID was not found for the specified username. Book ID must be a string to uuid format and username must be a string.',
   })
   @ApiResponse({ status: 500, description: 'Unexpected error.' })
   findOne(@Param('username') username: string, @Param('bookId') bookId: string) {
