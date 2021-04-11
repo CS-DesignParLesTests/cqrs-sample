@@ -36,7 +36,11 @@ export class UsersRepositoryTypeOrmAdapter
   async findOneByUsername(username: string): Promise<User | undefined> {
     // return this.usersRepository.findOne(username);
     const document: UserMongoDocument = await this.userModel.findOne({ username: username }).exec();
-    return new User(document.toObject());
+    if (document === null) {
+      return undefined;
+    } else {
+      return new User(document.toObject());
+    }
   }
 
   async findAll(): Promise<User[]> {
