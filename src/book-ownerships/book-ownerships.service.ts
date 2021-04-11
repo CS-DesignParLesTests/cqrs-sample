@@ -6,6 +6,8 @@ import {
   GetBookOwnershipByUserAndIdQuery,
   GetBookOwnershipsByUserQuery,
 } from './queries/implements';
+import { UpdateBookOwnershipDto } from './dto/update-book-ownership.dto';
+import { UpdateBookOwnershipCommand } from './commands/implements/update-book-ownership.command';
 
 @Injectable()
 export class BookOwnershipsService {
@@ -25,11 +27,10 @@ export class BookOwnershipsService {
     return this.queryBus.execute(new GetBookOwnershipByUserAndIdQuery(username, bookId));
   }
 
-  /* TODO
-  update(username: string, bookId: string, updateBookOwnershipDto: UpdateBookOwnershipDto) {
-    return `This action updates a #${bookId} bookOwnership`;
+  update(username: string, bookId: string, payload: UpdateBookOwnershipDto) {
+    return this.commandBus.execute(new UpdateBookOwnershipCommand(username, bookId, payload));
   }
-*/
+
   remove(username: string, bookId: string) {
     return this.commandBus.execute(new DeleteBookOwnershipCommand(username, bookId));
   }

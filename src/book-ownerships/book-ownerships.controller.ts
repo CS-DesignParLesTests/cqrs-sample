@@ -1,7 +1,8 @@
-import { Controller, Get, Post, Body, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, Patch } from '@nestjs/common';
 import { BookOwnershipsService } from './book-ownerships.service';
 import { CreateBookOwnershipDto } from './dto/create-book-ownership.dto';
 import { ApiTags } from '@nestjs/swagger';
+import { UpdateBookOwnershipDto } from './dto/update-book-ownership.dto';
 
 @ApiTags('User library')
 @Controller('users/:username/books-owned')
@@ -23,15 +24,14 @@ export class BookOwnershipsController {
     return this.bookOwnershipsService.findOneByUsernameAndId(username, bookId);
   }
 
-  /*
   @Patch(':bookId')
   update(
     @Param('username') username: string,
     @Param('bookId') bookId: string,
     @Body() updateBookOwnershipDto: UpdateBookOwnershipDto,
   ) {
-    return this.bookOwnershipsService.update(username, updateBookOwnershipDto);
-  }*/
+    return this.bookOwnershipsService.update(username, bookId, updateBookOwnershipDto);
+  }
 
   @Delete(':bookId')
   remove(@Param('username') username: string, @Param('bookId') bookId: string) {

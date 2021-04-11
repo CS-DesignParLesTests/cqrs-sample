@@ -24,10 +24,13 @@ export class BookOwnershipsRepositoryMemoryAdapter extends BookOwnershipsReposit
     return bookOwnership;
   }
 
-  async update(bookOwnership: BookOwnership): Promise<BookOwnership> {
-    throw Error('NotImplemented');
-    //TODO
-    return Promise.resolve(undefined);
+  async update(username: string, bookId: string, payload: BookOwnership): Promise<void> {
+    this.bookOwnerships = this.bookOwnerships.map((bookOwnership) => {
+      if (bookOwnership.username === username && bookOwnership.bookId === bookId) {
+        return Object.assign(bookOwnership, payload);
+      }
+      return bookOwnership;
+    });
   }
 
   async delete(username: string, bookId: string): Promise<void> {
