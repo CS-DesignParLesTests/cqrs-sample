@@ -28,8 +28,8 @@ export class UsersRepositoryTypeOrmAdapter
     await this.userModel.deleteMany({});
     for (let index = 0; index < allUsers.length; index++) {
       const element: User = allUsers[index];
-      const createdBook: UserMongoDocument = new this.userModel(element);
-      await createdBook.save();
+      const createdUser: UserMongoDocument = new this.userModel(element);
+      await createdUser.save();
     }
   }
 
