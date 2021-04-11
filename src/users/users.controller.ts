@@ -14,7 +14,7 @@ export class UsersController {
   @Get(':username')
   @ApiResponse({
     status: 200,
-    description: 'A User objects.',
+    description: 'A User object.',
     schema: { $ref: '#/components/schemas/User' },
   })
   @ApiResponse({ status: 401, description: 'Authorization information is missing or invalid.' })
