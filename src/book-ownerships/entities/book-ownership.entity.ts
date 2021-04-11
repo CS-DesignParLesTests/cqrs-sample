@@ -4,20 +4,21 @@ import { AggregateRoot } from '@nestjs/cqrs';
 //TODO Implement BookInterface to apply decorator pattern ?
 export class BookOwnership extends AggregateRoot {
   public username: string;
+
+  //TODO Store book instance instead ?
   public bookId: string;
 
-  public isBought = true;
-  public isSigned = false;
-  public isLent = false;
+  public isBought: boolean;
+  public isSigned: boolean;
+  public isLent: boolean;
 
   public dateAcquired: Date | undefined;
   public dateRead: Date | undefined;
 
   constructor(input) {
-    // need to check if input is defined because TypeOrm call the constructor without parameters
     super();
+    // need to check if input is defined because TypeOrm call the constructor without parameters
     if (input === undefined) return;
-    //TODO Store book instance instead ?
     ({
       username: this.username,
       bookId: this.bookId,
