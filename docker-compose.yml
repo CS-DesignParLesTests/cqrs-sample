@@ -23,7 +23,7 @@ services:
   mongodb:
     image: mongo:4.4
     environment:
-      - MONGODB_DATABASE="test"
+      - MONGODB_DATABASE="nest"
     ports:
       - 27017:27017
     networks:

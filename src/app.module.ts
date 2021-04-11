@@ -14,7 +14,7 @@ import { User } from './users/entities/user.entity';
     BooksModule,
     UsersModule,
     BookOwnershipsModule,
-    MongooseModule.forRoot('mongodb://databasemongo:27017/test'),
+    MongooseModule.forRoot('mongodb://databasemongo:27017/nest'),
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: 'database',
