@@ -9,7 +9,7 @@ export class UserMongo {
   username: string;
 
   @Prop()
-  displayname: string;
+  displayName: string;
 }
 
 export const UserMongoSchema = SchemaFactory.createForClass(UserMongo);
