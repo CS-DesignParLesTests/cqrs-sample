@@ -4,7 +4,7 @@ import { CreateBookOwnershipDto } from './dto/create-book-ownership.dto';
 import { CreateBookOwnershipCommand, DeleteBookOwnershipCommand } from './commands/implements';
 import {
   GetBookOwnershipByUserAndIdQuery,
-  GetBookOwnershipByUserQuery,
+  GetBookOwnershipsByUserQuery,
 } from './queries/implements';
 
 @Injectable()
@@ -18,7 +18,7 @@ export class BookOwnershipsService {
   }
 
   findAllByUsername(username: string) {
-    return this.queryBus.execute(new GetBookOwnershipByUserQuery(username));
+    return this.queryBus.execute(new GetBookOwnershipsByUserQuery(username));
   }
 
   findOneByUsernameAndId(username: string, bookId: string) {

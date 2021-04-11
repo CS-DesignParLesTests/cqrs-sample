@@ -21,5 +21,6 @@ import { User } from './entities/user.entity';
     ...CommandHandlers,
     ...QueryHandlers,
   ],
+  exports: [UsersService],
 })
 export class UsersModule {}

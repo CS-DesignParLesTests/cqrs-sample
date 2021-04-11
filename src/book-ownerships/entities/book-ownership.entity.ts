@@ -1,23 +1,24 @@
-import { Book } from '../../books/entities/book.entity';
 import { AggregateRoot } from '@nestjs/cqrs';
+import { Exclude } from 'class-transformer';
 
-//TODO Implement BookInterface to apply decorator pattern ?
+//TODO Implement BookInterface to apply decorator pattern and store the book instance ?
 export class BookOwnership extends AggregateRoot {
+  @Exclude()
   public username: string;
+
   public bookId: string;
 
-  public isBought = true;
-  public isSigned = false;
-  public isLent = false;
+  public isBought: boolean;
+  public isSigned: boolean;
+  public isLent: boolean;
 
   public dateAcquired: Date | undefined;
   public dateRead: Date | undefined;
 
   constructor(input) {
-    // need to check if input is defined because TypeOrm call the constructor without parameters
     super();
+    // need to check if input is defined because TypeOrm call the constructor without parameters
     if (input === undefined) return;
-    //TODO Store book instance instead ?
     ({
       username: this.username,
       bookId: this.bookId,

@@ -1,5 +1,5 @@
-import { BookOwnershipsRepository } from './book-ownerships-repository';
-import { BookOwnership } from '../entities/book-ownership.entity';
+import { BookOwnershipsRepository } from '../book-ownerships-repository';
+import { BookOwnership } from '../../entities/book-ownership.entity';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
