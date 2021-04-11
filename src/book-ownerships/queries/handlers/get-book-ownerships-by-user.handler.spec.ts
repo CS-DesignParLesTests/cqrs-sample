@@ -52,7 +52,7 @@ describe('The GetBookOwnershipsByUserHandler', () => {
       });
 
       describe('execute', () => {
-        it('should return the expected BookOwnerships with their correct username and displayname', async () => {
+        it('should return the expected BookOwnerships', async () => {
           const bookOwnerships1 = await getBookOwnershipsByUserHandler.execute(
             new GetBookOwnershipsByUserQuery(username1),
           );
