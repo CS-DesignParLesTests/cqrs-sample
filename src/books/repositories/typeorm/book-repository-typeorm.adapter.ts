@@ -69,7 +69,7 @@ export class BookRepositoryTypeOrmAdapter
   private async handleCreateMongo(id: string): Promise<void> {
     const toWrite: Book = await this.booksRepository.findOne(id);
     const createdBook: BookMongoDocument = new this.bookModel(toWrite);
-    // await or not for last ? or return ? or return await ?
+    //? await or not for last ? or return ? or return await ?
     await createdBook.save();
   }
 
@@ -78,18 +78,50 @@ export class BookRepositoryTypeOrmAdapter
       id,
       ...payload,
     });
-    // Possible de reecrire avec async ???
+    //? Possible de reecrire avec async ???
     output.then(async () => {
       await this.handleCreateMongo(id);
     });
     return output;
   }
 
+  private async handleDeleteMongo(id: string): Promise<void> {
+    //? await or not ?
+    await this.bookModel.deleteOne({ id: id });
+  }
+
   async delete(id: string): Promise<void> {
-    await this.booksRepository.delete(id);
+    // The real type is Promise<DeleteResult>
+    //  not used to avoid useless import
+    //  and beacause the type is not relevant in this case
+    const output: Promise<any> = this.booksRepository.delete(id);
+    output.then(async () => {
+      await this.handleDeleteMongo(id);
+    });
+    //? ou juste 'return' ?
+    return output;
+  }
+
+  private async handleUpdateMongo(id: string): Promise<void> {
+    const originalBook: Book = await this.booksRepository.findOne(id);
+    const documentBook: BookMongoDocument = await this.bookModel.findOne({ id: id }).exec();
+    documentBook.set(originalBook);
+    //? await or not for last ? or return ? or return await ?
+    await documentBook.save();
   }
 
   async update(id: string, payload: UpdateBookDto): Promise<void> {
-    await this.booksRepository.update(id, payload);
+    //? est ce que vous pensez que cette implemetation est mieux que celle de delete ?
+    return new Promise((resolve, reject) => {
+      const output: Promise<any> = this.booksRepository.update(id, payload);
+      output
+        .then(async () => {
+          resolve();
+          await this.handleUpdateMongo(id);
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
   }
 }
