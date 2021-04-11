@@ -41,7 +41,7 @@ export class BookRepositoryTypeOrmAdapter
   async findAll(): Promise<Book[]> {
     // return this.booksRepository.find();
 
-    // Je crois que je me suis perdu, help pour reecrire acev async/await
+    // Je crois que je me suis perdu, help pour reecrire avec async/await
     // return new Promise((resolve, reject) => {
     //   this.bookModel
     //     .find({})
@@ -66,11 +66,23 @@ export class BookRepositoryTypeOrmAdapter
     return output;
   }
 
+  private async handleCreateMongo(id: string): Promise<void> {
+    const toWrite: Book = await this.booksRepository.findOne(id);
+    const createdBook: BookMongoDocument = new this.bookModel(toWrite);
+    // await or not for last ? or return ? or return await ?
+    await createdBook.save();
+  }
+
   async create(id: string, payload: CreateBookDto): Promise<Book> {
-    return this.booksRepository.save({
+    const output: Promise<Book> = this.booksRepository.save({
       id,
       ...payload,
     });
+    // Possible de reecrire avec async ???
+    output.then(async () => {
+      await this.handleCreateMongo(id);
+    });
+    return output;
   }
 
   async delete(id: string): Promise<void> {
