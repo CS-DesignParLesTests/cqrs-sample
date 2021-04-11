@@ -35,7 +35,11 @@ export class BookRepositoryTypeOrmAdapter
   async findOneById(id: string): Promise<Book> {
     // return this.booksRepository.findOne(id);
     const document: BookMongoDocument = await this.bookModel.findOne({ id: id }).exec();
-    return new Book(document.toObject());
+    if (document === null) {
+      return undefined;
+    } else {
+      return new Book(document.toObject());
+    }
   }
 
   async findAll(): Promise<Book[]> {
