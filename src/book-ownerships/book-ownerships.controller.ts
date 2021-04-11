@@ -3,6 +3,7 @@ import { BookOwnershipsService } from './book-ownerships.service';
 import { CreateBookOwnershipDto } from './dto/create-book-ownership.dto';
 import { ApiExtraModels, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { BookOwnership } from './entities/book-ownership.entity';
+import { UpdateBookOwnershipDto } from './dto/update-book-ownership.dto';
 
 @ApiTags('User library')
 @Controller('users/:username/books-owned')
