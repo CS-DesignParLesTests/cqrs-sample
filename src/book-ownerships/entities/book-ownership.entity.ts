@@ -1,17 +1,43 @@
 import { AggregateRoot } from '@nestjs/cqrs';
 import { Exclude } from 'class-transformer';
+import { ApiProperty } from '@nestjs/swagger';
+import { Entity } from 'typeorm';
 
 //TODO Implement BookInterface to apply decorator pattern and store the book instance ?
+@Entity()
 export class BookOwnership extends AggregateRoot {
   @Exclude()
   public username: string;
 
+  @ApiProperty({
+    required: true,
+    description: 'The unique ID of the book',
+    type: 'string',
+    format: 'uuid',
+  })
   public bookId: string;
 
+  @ApiProperty({
+    description: 'Indicates whether the book has been bought or not by the user',
+    type: 'boolean',
+  })
   public isBought: boolean;
+  @ApiProperty({
+    description: `Indicates whether the user's book has been signed or not`,
+    type: 'boolean',
+  })
   public isSigned: boolean;
+  @ApiProperty({
+    description: `Indicates whether the user's book is lent or not`,
+    type: 'boolean',
+  })
   public isLent: boolean;
 
+  @ApiProperty({
+    description: `Indicates the acquisition date of the book by the user`,
+    type: 'date',
+    format: ' date-time',
+  })
   public dateAcquired: Date | undefined;
   public dateRead: Date | undefined;
 
