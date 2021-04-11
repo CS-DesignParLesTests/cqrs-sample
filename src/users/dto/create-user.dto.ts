@@ -6,7 +6,6 @@ export class CreateUserDto {
     required: true,
     description: 'The ID of a user',
     type: 'string',
-    format: 'uuid',
   })
   @IsNotEmpty()
   username: string;
