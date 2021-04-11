@@ -38,8 +38,8 @@ export class CreateBookOwnershipDto {
 
   @ApiPropertyOptional({
     description: `Indicates the acquisition date of the book by the user`,
-    type: 'date',
-    format: ' date-time',
+    type: 'string',
+    format: 'date-time',
   })
   @IsOptional()
   @IsDate()
@@ -49,8 +49,8 @@ export class CreateBookOwnershipDto {
 
   @ApiPropertyOptional({
     description: `Indicates the reading date of the book by the user`,
-    type: 'date',
-    format: ' date-time',
+    type: 'string',
+    format: 'date-time',
   })
   @IsOptional()
   @IsDate()

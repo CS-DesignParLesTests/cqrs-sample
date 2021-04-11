@@ -1,12 +1,13 @@
 import { AggregateRoot } from '@nestjs/cqrs';
 import { Exclude } from 'class-transformer';
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiHideProperty, ApiProperty } from '@nestjs/swagger';
 import { Entity } from 'typeorm';
 
 //TODO Implement BookInterface to apply decorator pattern and store the book instance ?
 @Entity()
 export class BookOwnership extends AggregateRoot {
   @Exclude()
+  @ApiHideProperty()
   public username: string;
 
   @ApiProperty({
