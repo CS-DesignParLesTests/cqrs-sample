@@ -34,11 +34,19 @@ export class UsersRepositoryTypeOrmAdapter
   }
 
   async findOneByUsername(username: string): Promise<User | undefined> {
-    return this.usersRepository.findOne(username);
+    // return this.usersRepository.findOne(username);
+    const document: UserMongoDocument = await this.userModel.findOne({ username: username }).exec();
+    return new User(document.toObject());
   }
 
   async findAll(): Promise<User[]> {
-    return this.usersRepository.find();
+    // return this.usersRepository.find();
+    const documents: UserMongoDocument[] = await this.userModel.find({}).exec();
+    const output: User[] = [];
+    for (let index = 0; index < documents.length; index++) {
+      output[index] = new User(documents[index].toObject());
+    }
+    return output;
   }
 
   async create(user: User): Promise<User> {
