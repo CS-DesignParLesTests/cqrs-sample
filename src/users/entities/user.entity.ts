@@ -10,7 +10,6 @@ export class User extends AggregateRoot {
     required: true,
     description: 'The ID of a user',
     type: 'string',
-    format: 'uuid',
   })
   @IsNotEmpty()
   public username: string;
