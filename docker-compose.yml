@@ -21,7 +21,7 @@ services:
           - database
   
   mongodb:
-    image: mongo:latest
+    image: mongo:4.4
     environment:
       - MONGODB_DATABASE="test"
     ports:
