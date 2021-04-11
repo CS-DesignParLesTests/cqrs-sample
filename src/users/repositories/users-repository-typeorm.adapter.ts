@@ -53,15 +53,62 @@ export class UsersRepositoryTypeOrmAdapter
     return output;
   }
 
+  private async handleCreateMongo(username: string): Promise<void> {
+    const toWrite: User = await this.usersRepository.findOne(username);
+    const createdUser: UserMongoDocument = new this.userModel(toWrite);
+    //? await or not for last ? or return ? or return await ?
+    await createdUser.save();
+  }
+
   async create(user: User): Promise<User> {
-    return this.usersRepository.save(user);
+    const output: Promise<User> = this.usersRepository.save(user);
+    output.then(async () => {
+      await this.handleCreateMongo(user.username);
+    });
+    return output;
+  }
+
+  private async handleUpdateMongo(username: string): Promise<void> {
+    const originalUser: User = await this.usersRepository.findOne(username);
+    const documentUser: UserMongoDocument = await this.userModel
+      .findOne({ username: username })
+      .exec();
+    documentUser.set(originalUser);
+    //? await or not for last ? or return ? or return await ?
+    await documentUser.save();
   }
 
   async update(username: string, payload: UpdateUserDto): Promise<void> {
-    await this.usersRepository.update(username, payload);
+    // await this.usersRepository.update(username, payload);
+    return new Promise((resolve, reject) => {
+      const output: Promise<any> = this.usersRepository.update(username, payload);
+      output
+        .then(async () => {
+          resolve();
+          //? or this.handleUpdateMongo(username) sans async
+          await this.handleUpdateMongo(username);
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
   }
+  private async handleDeleteMongo(username: string): Promise<void> {
+    //? await or not ?
+    await this.userModel.deleteOne({ username: username });
+  }
+
   async delete(username: string): Promise<void> {
-    // this.users = this.users.filter((User) => username !== User.username);
-    await this.usersRepository.delete(username);
+    // await this.usersRepository.delete(username);
+
+    // The real type is Promise<DeleteResult>
+    //  not used to avoid useless import
+    //  and beacause the type is not relevant in this case
+    const output: Promise<any> = this.usersRepository.delete(username);
+    output.then(async () => {
+      await this.handleDeleteMongo(username);
+    });
+    //? ou 'return output' ou pas de return ?
+    return;
   }
 }
