@@ -1,7 +1,9 @@
 import { AggregateRoot } from '@nestjs/cqrs';
+import { Exclude } from 'class-transformer';
 
 //TODO Implement BookInterface to apply decorator pattern and store the book instance ?
 export class BookOwnership extends AggregateRoot {
+  @Exclude()
   public username: string;
 
   public bookId: string;
