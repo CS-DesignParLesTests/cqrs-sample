@@ -75,7 +75,7 @@ export class BookOwnershipsController {
   @ApiResponse({ status: 200, description: 'The bookOwnership has been successfully updated.' })
   @ApiResponse({ status: 401, description: 'Authorization information is missing or invalid.' })
   @ApiResponse({ status: 403, description: 'Forbidden.' })
-   @ApiResponse({
+  @ApiResponse({
     status: 404,
     description:
       'Bad Request. Book ID must be a string to uuid format and username must be a string.',
