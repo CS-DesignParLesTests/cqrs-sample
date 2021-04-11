@@ -14,12 +14,15 @@ export class BooksController {
   @Get(':id')
   @ApiResponse({
     status: 200,
-    description: 'The resource has been fetched and is transmitted in the message body.',
+    description: 'A Book object.',
     schema: { $ref: '#/components/schemas/Book' },
   })
   @ApiResponse({ status: 401, description: 'Authorization information is missing or invalid.' })
   @ApiResponse({ status: 403, description: 'Forbidden.' })
-  @ApiResponse({ status: 400, description: 'Bad Request. BookID must be a string to uuid format.' })
+  @ApiResponse({
+    status: 400,
+    description: 'Bad Request. Book ID must be a string to uuid format.',
+  })
   @ApiResponse({ status: 500, description: 'Unexpected error.' })
   findOne(@Param('id') id: string) {
     return this.booksService.find(id);

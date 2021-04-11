@@ -13,7 +13,7 @@ export class BookOwnershipsController {
   @Get(':bookId')
   @ApiResponse({
     status: 200,
-    description: 'The resource has been fetched and is transmitted in the message body.',
+    description: 'A BookOwnership object.',
     schema: { $ref: '#/components/schemas/BookOwnership' },
   })
   @ApiResponse({ status: 401, description: 'Authorization information is missing or invalid.' })
@@ -21,7 +21,7 @@ export class BookOwnershipsController {
   @ApiResponse({
     status: 404,
     description:
-      'Bad Request. A BookOwnership ID with the specified ID was not found for the specified username. BookOwnership ID must be a string to uuid format and username must be a string.',
+      'Bad Request. A BookOwnership ID with the specified book ID was not found for the specified username. Book ID must be a string to uuid format and username must be a string.',
   })
   @ApiResponse({ status: 500, description: 'Unexpected error.' })
   findOne(@Param('username') username: string, @Param('bookId') bookId: string) {
@@ -56,14 +56,14 @@ export class BookOwnershipsController {
   @ApiResponse({
     status: 400,
     description:
-      'Bad Request. A BookOwnership ID with the specified ID was not found for the specified username. BookOwnership ID must be a string to uuid format and username must be a string.',
+      'Bad Request. A BookOwnership with the specified book ID was not found for the specified username. Book ID must be a string to uuid format and username must be a string.',
   })
   @ApiResponse({ status: 401, description: 'Authorization information is missing or invalid.' })
   @ApiResponse({ status: 403, description: 'Forbidden.' })
   @ApiResponse({
     status: 404,
     description:
-      'Bad Request. BookOwnership ID must be a string to uuid format and username must be a string.',
+      'Bad Request. Book ID must be a string to uuid format and username must be a string.',
   })
   @ApiResponse({ status: 500, description: 'Unexpected error.' })
   add(@Param('username') username: string, @Body() addBookOwnershipDto: CreateBookOwnershipDto) {
@@ -78,7 +78,7 @@ export class BookOwnershipsController {
    @ApiResponse({
     status: 404,
     description:
-      'Bad Request. BookOwnership ID must be a string to uuid format and username must be a string.',
+      'Bad Request. Book ID must be a string to uuid format and username must be a string.',
   })
   @ApiResponse({ status: 500, description: 'Unexpected error.' })
   update(
@@ -96,7 +96,7 @@ export class BookOwnershipsController {
   @ApiResponse({
     status: 404,
     description:
-      'Bad Request. A BookOwnership ID with the specified ID was not found for the specified username. BookOwnership ID must be a string to uuid format and username must be a string.',
+      'Bad Request. A BookOwnership with the specified book ID was not found for the specified username. Book ID must be a string to uuid format and username must be a string.',
   })
   @ApiResponse({ status: 500, description: 'Unexpected error.' })
   remove(@Param('username') username: string, @Param('bookId') bookId: string) {
