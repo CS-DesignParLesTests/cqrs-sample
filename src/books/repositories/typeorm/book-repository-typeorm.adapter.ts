@@ -117,6 +117,7 @@ export class BookRepositoryTypeOrmAdapter
       output
         .then(async () => {
           resolve();
+          //? or this.handleUpdateMongo(id) sans async
           await this.handleUpdateMongo(id);
         })
         .catch((error) => {
