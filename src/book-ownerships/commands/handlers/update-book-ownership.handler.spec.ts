@@ -9,7 +9,7 @@ import { BookOwnership } from '../../entities/book-ownership.entity';
 import { UpdateBookOwnershipHandler } from './update-book-ownership.handler';
 import { GetBookOwnershipByUserAndIdQuery } from '../../queries/implements/get-book-ownership-by-user-and-id.query';
 import { GetBookOwnershipByUserAndIdHandler } from '../../queries/handlers/get-book-ownership-by-user-and-id.handler';
-import { UpdateBookOwnershipDto } from 'src/book-ownerships/dto/update-book-ownership.dto';
+import { UpdateBookOwnershipDto } from '../../dto/update-book-ownership.dto';
 
 // Replace UsersRepositoryMemoryAdapter with a mocked class
 jest.mock('../../repositories/memory/book-ownerships-repository-memory.adapter');
@@ -43,18 +43,22 @@ describe('The UpdateBookOwnershipHandler', () => {
   });
   describe('execute', function () {
     describe('with a non-empty repository', () => {
-      const existingUserName = 'Gabriel';
-      const existingOwnedBookId = 'An-existing-id-already-owned';
-      const existingNotOwnedBookId = 'An-existing-id-not-owned';
-
-      const existingBookOwnership = new BookOwnership({
-        username: existingUserName,
-        bookId: existingOwnedBookId,
-        isLent: true,
-        isBought: true,
-        isSigned: true,
-      });
+      let existingUserName;
+      let existingOwnedBookId;
+      let existingNotOwnedBookId;
+      let existingBookOwnership;
       beforeEach(() => {
+        existingUserName = 'Gabriel';
+        existingOwnedBookId = 'An-existing-id-already-owned';
+        existingNotOwnedBookId = 'An-existing-id-not-owned';
+
+        existingBookOwnership = new BookOwnership({
+          username: existingUserName,
+          bookId: existingOwnedBookId,
+          isLent: true,
+          isBought: true,
+          isSigned: true,
+        });
         mockedRepository.findOneByUsernameAndId.mockImplementation(
           (username: string, bookId: string) => {
             if (
@@ -86,9 +90,9 @@ describe('The UpdateBookOwnershipHandler', () => {
           'BookOwnership does not exist',
         );
       });
-      it('should update the lent property of a BookOwnership', async () => {
+      it('should only update the lent property of a BookOwnership', async () => {
         const command = new UpdateBookOwnershipCommand(existingUserName, existingOwnedBookId, {
-          isLent: false,
+          isLent: false, // isLent pass true to false
         });
         await updateBookOwnershipHandler.execute(command);
         const queryGet = new GetBookOwnershipByUserAndIdQuery(
@@ -97,10 +101,11 @@ describe('The UpdateBookOwnershipHandler', () => {
         );
         const bookOwernerShip = await getBookOwernshipHandler.execute(queryGet);
         expect(bookOwernerShip.isLent).toEqual(false);
+        expect(bookOwernerShip.isBought).toEqual(true); // expect to not change
       });
-      it('should update the bought property of a BookOwnership', async () => {
+      it('should update only the bought property of a BookOwnership', async () => {
         const command = new UpdateBookOwnershipCommand(existingUserName, existingOwnedBookId, {
-          isBought: false,
+          isBought: false, // isBought pass true to false
         });
         await updateBookOwnershipHandler.execute(command);
         const queryGet = new GetBookOwnershipByUserAndIdQuery(
@@ -109,6 +114,7 @@ describe('The UpdateBookOwnershipHandler', () => {
         );
         const bookOwernerShip = await getBookOwernshipHandler.execute(queryGet);
         expect(bookOwernerShip.isBought).toEqual(false);
+        expect(bookOwernerShip.isLent).toEqual(true); // expect to not change
       });
       it('should update the bought and lent property of a BookOwnership', async () => {
         const command = new UpdateBookOwnershipCommand(existingUserName, existingOwnedBookId, {
@@ -121,8 +127,8 @@ describe('The UpdateBookOwnershipHandler', () => {
           existingOwnedBookId,
         );
         const bookOwernerShip = await getBookOwernshipHandler.execute(queryGet);
-        expect(bookOwernerShip.isBought).toEqual(false);
-        expect(bookOwernerShip.isLent).toEqual(true);
+        expect(bookOwernerShip.isBought).toEqual(false); // isBought pass true to false
+        expect(bookOwernerShip.isLent).toEqual(true); // isLent pass true to true
       });
     });
   });
