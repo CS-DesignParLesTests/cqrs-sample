@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  mysql:
+  mysql_test:
     container_name: demonestjs_test_mysql
     build: mysqldatabase/test
     restart: always
@@ -18,7 +18,7 @@ services:
         aliases:
           - database
 
-  app:
+  app_test:
     container_name: demonest_test_app
     build:
       context: ./
@@ -29,7 +29,7 @@ services:
     networks:
       - netwtestnestjs
     depends_on:
-      - mysql
+      - mysql_test
 
 networks:
   netwtestnestjs:
