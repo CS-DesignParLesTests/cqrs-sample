@@ -19,6 +19,17 @@ services:
       netwdevnestjs:
         aliases:
           - database
+  
+  mongodb:
+    image: mongo:4.4
+    environment:
+      - MONGODB_DATABASE="nest"
+    ports:
+      - 27017:27017
+    networks:
+      netwdevnestjs:
+        aliases:
+          - databasemongo
 
   app:
     image: node:15.14-alpine
@@ -36,6 +47,7 @@ services:
       - netwdevnestjs
     depends_on:
       - mysql
+      - mongodb
 
 networks:
   netwdevnestjs:

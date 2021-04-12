@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { BooksModule } from './books/books.module';
@@ -13,6 +14,7 @@ import { User } from './users/entities/user.entity';
     BooksModule,
     UsersModule,
     BookOwnershipsModule,
+    MongooseModule.forRoot('mongodb://databasemongo:27017/nest'),
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: 'database',
