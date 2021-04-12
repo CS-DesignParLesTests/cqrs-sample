@@ -14,13 +14,18 @@ export class BookOwnershipsRepositoryTypeOrmAdapter extends BookOwnershipsReposi
   }
 
   async findOneByUsernameAndId(
-    username: string,
-    bookId: string,
+    _username: string,
+    _bookId: string,
   ): Promise<BookOwnership | undefined> {
-    return this.bookOwnershipsRepository.findOne(username);
+    return this.bookOwnershipsRepository.findOne({
+      where: { username: _username, bookId: _bookId },
+    });
   }
 
   async findAllByUsername(_username: string): Promise<BookOwnership[]> {
+    //? Y faut mettre le await ??
+    //?  genre : return await this.bookOwnershipsRepository.find({ where: { username: _username } });
+    //?  pour moi les 2 sont bon, c'est ca ? si oui y en a un a privilegier ?
     return this.bookOwnershipsRepository.find({ where: { username: _username } });
   }
 
@@ -28,43 +33,13 @@ export class BookOwnershipsRepositoryTypeOrmAdapter extends BookOwnershipsReposi
     return this.bookOwnershipsRepository.save(bookOwnership);
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async update(bookOwnership: BookOwnership): Promise<BookOwnership> {
     throw Error('NotImplemented');
   }
 
-  async delete(username: string, bookId: string): Promise<void> {
-    throw Error('NotImplemented');
-    // await this.bookOwnershipsRepository.delete();
+  async delete(_username: string, _bookId: string): Promise<void> {
+    await this.bookOwnershipsRepository.delete({ username: _username, bookId: _bookId });
+    return;
   }
 }
-
-// @Injectable()
-// export class UsersRepositoryTypeOrmAdapter extends BookOwnershipsRepository {
-//   constructor(
-//     @InjectRepository(BookOwnership)
-//     private usersRepository: Repository<BookOwnership>,
-//   ) {
-//     super();
-//   }
-
-//   async findOneByUsername(username: string): Promise<BookOwnership | undefined> {
-//     return this.usersRepository.findOne(username);
-//   }
-
-//   async findAll(): Promise<User[]> {
-//     return this.usersRepository.find();
-//   }
-
-//   async create(user: User): Promise<User> {
-//     return this.usersRepository.save(user);
-//   }
-
-//   async update(username: string, user: User): Promise<User> {
-//     throw Error('NotImplemented');
-//   }
-
-//   async delete(username: string): Promise<void> {
-//     // this.users = this.users.filter((User) => username !== User.username);
-//     await this.usersRepository.delete(username);
-//   }
-// }
