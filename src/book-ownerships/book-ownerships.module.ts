@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { MongooseModule } from '@nestjs/mongoose';
 import { CqrsModule } from '@nestjs/cqrs';
 import { BooksModule } from '../books/books.module';
 import { UsersModule } from '../users/users.module';
@@ -12,9 +13,18 @@ import { BookOwnershipsRepositoryTypeOrmAdapter } from './repositories/book-owne
 import { QueryHandlers } from './queries/handlers';
 import { CommandHandlers } from './commands/handlers';
 import { BookOwnership } from './entities/book-ownership.entity';
+import { BookOwnershipMongo, BookOwnershipMongoSchema } from './schemas/book-ownership.schema';
 
 @Module({
-  imports: [BooksModule, UsersModule, CqrsModule, TypeOrmModule.forFeature([BookOwnership])],
+  imports: [
+    BooksModule,
+    MongooseModule.forFeature([
+      { name: BookOwnershipMongo.name, schema: BookOwnershipMongoSchema },
+    ]),
+    UsersModule,
+    CqrsModule,
+    TypeOrmModule.forFeature([BookOwnership]),
+  ],
   controllers: [BookOwnershipsController],
   providers: [
     BookOwnershipsService,
