@@ -46,6 +46,7 @@ services:
     networks:
       - netwdevnestjs
     depends_on:
+      - mysql
       - mongodb
 
 networks:
