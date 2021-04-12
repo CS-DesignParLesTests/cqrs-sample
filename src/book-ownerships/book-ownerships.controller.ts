@@ -1,8 +1,9 @@
-import { Controller, Get, Post, Body, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, Patch } from '@nestjs/common';
 import { BookOwnershipsService } from './book-ownerships.service';
 import { CreateBookOwnershipDto } from './dto/create-book-ownership.dto';
 import { ApiExtraModels, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { BookOwnership } from './entities/book-ownership.entity';
+import { UpdateBookOwnershipDto } from './dto/update-book-ownership.dto';
 
 @ApiTags('User library')
 @Controller('users/:username/books-owned')
@@ -70,12 +71,11 @@ export class BookOwnershipsController {
     return this.bookOwnershipsService.create(username, addBookOwnershipDto);
   }
 
-  /*
   @Patch(':bookId')
   @ApiResponse({ status: 200, description: 'The bookOwnership has been successfully updated.' })
   @ApiResponse({ status: 401, description: 'Authorization information is missing or invalid.' })
   @ApiResponse({ status: 403, description: 'Forbidden.' })
-   @ApiResponse({
+  @ApiResponse({
     status: 404,
     description:
       'Bad Request. Book ID must be a string to uuid format and username must be a string.',
@@ -86,8 +86,8 @@ export class BookOwnershipsController {
     @Param('bookId') bookId: string,
     @Body() updateBookOwnershipDto: UpdateBookOwnershipDto,
   ) {
-    return this.bookOwnershipsService.update(username, updateBookOwnershipDto);
-  }*/
+    return this.bookOwnershipsService.update(username, bookId, updateBookOwnershipDto);
+  }
 
   @Delete(':bookId')
   @ApiResponse({ status: 200, description: 'The user has been successfully deleted.' })

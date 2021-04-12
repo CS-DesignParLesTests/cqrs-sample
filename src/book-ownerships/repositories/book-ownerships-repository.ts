@@ -1,5 +1,6 @@
 import { BookOwnership } from '../entities/book-ownership.entity';
 import { Injectable } from '@nestjs/common';
+import { UpdateBookOwnershipDto } from '../dto/update-book-ownership.dto';
 
 @Injectable()
 export abstract class BookOwnershipsRepository {
@@ -12,7 +13,7 @@ export abstract class BookOwnershipsRepository {
 
   abstract create(bookOwnership: BookOwnership): Promise<BookOwnership>;
 
-  abstract update(bookOwnership: BookOwnership): Promise<BookOwnership>;
+  abstract update(username: string, bookId: string, payload: UpdateBookOwnershipDto): Promise<void>;
 
   abstract delete(username: string, bookId: string): Promise<void>;
 }
