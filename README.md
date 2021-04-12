@@ -13,21 +13,55 @@ You can also get informations about books that were published but that you don't
 
 ## ROADMAP
 
-* Create a super class **Book**
-* Manage different **Users**
-* Implement the features following CQRS principles & using TDD
-* Apply code style and static code analysis with ESLint & Prettier
-* Take advantage of GitHub Actions to enforce quality thanks to tests & lint rules
-* Docker?
-* Front-end with available time
-* Check how to implement PostgreSQL with TypeORM and MongoDB with Mongoose
-* Generate OpenAPI Specification
+- [X] Create a super class **Book**
+- [X] Manage different **Users**
+- [X] Implement the features following CQRS principles & using TDD
+- [X] Apply code style and static code analysis with ESLint & Prettier
+- [X] Take advantage of GitHub Actions to enforce quality thanks to tests & lint rules
+- [X] Docker
+- [X] Check and implement PostgreSQL with TypeORM and MongoDB with Mongoose
+- [X] Generate OpenAPI Specification
+- [ ] Front-end with available time
+- [ ] End-to-end testing 
 
 ### Features
 
-* Owned books
-* Lent books
-* Signed books
-* Missing books from books series
-* Favorites books
-* Subscribe to related news about peculiar book
+- [X] Owned books
+- [X] Lent books
+- [X] Signed books
+- [ ] Missing books from books series
+- [ ] Favorites books
+- [ ] Subscribe to related news about particular book
+
+## 👨‍💻Tech
+- [MongoDB](https://www.mongodb.com/fr)
+- [NestJs](https://nestjs.com/)
+- [MySql](https://www.mysql.com/fr/)
+
+# 🐳  Installation and Run
+
+Just run the docker :
+```
+docker-compose up --build
+```
+
+The Swagger API definition is then available on http://localhost:3000/api/
+
+## Contributors
+
+Thanks to the following people who have contributed to this project:
+
+* [@Maxime Tran](https://github.com/MaxmeTrn/) 🔨
+* [@Gabriel Soudry](https://github.com/gabrielSoudry) 🔨
+* [@Jerome Petot](https://github.com/JeromePto) 🔨
+* [@Candice Rumeau](https://github.com/candylol17) 🔨
+* [@Amine Agoussal](https://github.com/AmineI) 🔨
+
+## Contact
+
+If you want to contact us you can reach us on GitHub
+
+## License
+
+This project uses the following license: No licence 🙂
+
