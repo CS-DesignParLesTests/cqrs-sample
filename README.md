@@ -13,21 +13,22 @@ You can also get informations about books that were published but that you don't
 
 ## ROADMAP
 
-* Create a super class **Book**
-* Manage different **Users**
-* Implement the features following CQRS principles & using TDD
-* Apply code style and static code analysis with ESLint & Prettier
-* Take advantage of GitHub Actions to enforce quality thanks to tests & lint rules
-* Docker?
-* Front-end with available time
-* Check how to implement PostgreSQL with TypeORM and MongoDB with Mongoose
-* Generate OpenAPI Specification
+- [X] Create a super class **Book**
+- [X] Manage different **Users**
+- [X] Implement the features following CQRS principles & using TDD
+- [X] Apply code style and static code analysis with ESLint & Prettier
+- [X] Take advantage of GitHub Actions to enforce quality thanks to tests & lint rules
+- [X] Docker
+- [X] Check and implement PostgreSQL with TypeORM and MongoDB with Mongoose
+- [X] Generate OpenAPI Specification
+- [ ] Front-end with available time
+- [ ] End-to-end testing 
 
 ### Features
 
-* Owned books
-* Lent books
-* Signed books
-* Missing books from books series
-* Favorites books
-* Subscribe to related news about peculiar book
+- [X] Owned books
+- [X] Lent books
+- [X] Signed books
+- [ ] Missing books from books series
+- [ ] Favorites books
+- [ ] Subscribe to related news about peculiar book
