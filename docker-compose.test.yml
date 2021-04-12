@@ -21,6 +21,22 @@ services:
         aliases:
           - database
 
+  mongodb_test:
+    container_name: demonestjs_test_mongo
+    profiles:
+      - test_e2e
+      - test_controller
+    image: mongo:4.4
+    restart: always
+    environment:
+      - MONGODB_DATABASE="nest"
+    ports:
+      - 27018:27017
+    networks:
+      netwtestnestjs:
+        aliases:
+          - databasemongo
+
   app_test_e2e:
     container_name: demonest_test_e2e_app
     profiles:
