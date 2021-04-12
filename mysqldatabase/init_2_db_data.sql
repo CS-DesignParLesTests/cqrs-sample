@@ -14,9 +14,9 @@ DROP TABLE IF EXISTS `book`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `book` (
-  `id` varchar(255) NOT NULL,
-  `title` varchar(255) NOT NULL,
-  `author` varchar(255) NOT NULL,
+  `id` varchar(36) NOT NULL,
+  `title` TEXT NOT NULL,
+  `author` TEXT NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
