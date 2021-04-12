@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { UpdateBookOwnershipDto } from '../dto/update-book-ownership.dto';
 import { BookOwnershipsRepository } from './book-ownerships-repository';
 import { BookOwnership } from '../entities/book-ownership.entity';
 
@@ -33,9 +34,9 @@ export class BookOwnershipsRepositoryTypeOrmAdapter extends BookOwnershipsReposi
     return this.bookOwnershipsRepository.save(bookOwnership);
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  async update(bookOwnership: BookOwnership): Promise<BookOwnership> {
-    throw Error('NotImplemented');
+  async update(_username: string, _bookId: string, payload: UpdateBookOwnershipDto): Promise<void> {
+    await this.bookOwnershipsRepository.update({ username: _username, bookId: _bookId }, payload);
+    return;
   }
 
   async delete(_username: string, _bookId: string): Promise<void> {
