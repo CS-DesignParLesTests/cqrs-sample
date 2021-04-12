@@ -1,8 +1,9 @@
-version: "3.8"
+version: '3.8'
 
 services:
   mysql:
-    build: mysqldatabase
+    container_name: demonestjs_dev_mysql
+    build: mysqldatabase/dev
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
@@ -11,10 +12,10 @@ services:
       MYSQL_DATABASE: demonestjs
     ports:
       # Expose port 3307 on host machine in order to avoid collision with another MySQL instance running on host machine
-      - "3307:3306"
+      - '3307:3306'
     volumes:
       # Persist data between container invocation
-      - "dbdata:/var/lib/mysqldocker/data"
+      - 'dbdata:/var/lib/mysqldocker/data/dev'
     networks:
       netwdevnestjs:
         aliases:
@@ -32,6 +33,7 @@ services:
           - databasemongo
 
   app:
+    container_name: demonestjs_dev_app
     image: node:15.14-alpine
     working_dir: /usr/src/app
     # Restart automatically docker on any file change
@@ -42,7 +44,7 @@ services:
       # Mount an anonymous volume to keep node_modules from being overriden by local changes
       - /usr/src/app/node_modules
     ports:
-      - "3000:3000"
+      - '3000:3000'
     networks:
       - netwdevnestjs
     depends_on:

@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  mysql:
+    container_name: demonestjs_test_mysql
+    build: mysqldatabase/test
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: nestjs
+      MYSQL_PASSWORD: nestjs
+      MYSQL_DATABASE: demonestjs
+    ports:
+      # Expose port 3308 on host machine in order to avoid collision with another MySQL instance running on host machine
+      - '3308:3306'
+    networks:
+      netwtestnestjs:
+        aliases:
+          - database
+
+  app:
+    container_name: demonest_test_app
+    build:
+      context: ./
+      dockerfile: test/Dockerfile
+      target: test
+    ports:
+      - '3001:3000'
+    networks:
+      - netwtestnestjs
+    depends_on:
+      - mysql
+
+networks:
+  netwtestnestjs:

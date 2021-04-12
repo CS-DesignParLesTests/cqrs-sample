@@ -1,4 +1,4 @@
-FROM node:15.14-alpine AS production
+FROM node:15.14-alpine AS test
 
 # Create app directory
 WORKDIR /usr/src/app
@@ -13,4 +13,4 @@ COPY . .
 
 EXPOSE 3000
 RUN yarn build
-CMD ["yarn", "start"]
+CMD ["yarn", "test:e2e"]
