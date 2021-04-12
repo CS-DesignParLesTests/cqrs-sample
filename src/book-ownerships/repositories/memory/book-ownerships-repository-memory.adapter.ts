@@ -1,6 +1,7 @@
 import { BookOwnershipsRepository } from '../book-ownerships-repository';
 import { BookOwnership } from '../../entities/book-ownership.entity';
 import { Injectable } from '@nestjs/common';
+import { UpdateBookOwnershipDto } from '../../dto/update-book-ownership.dto';
 
 @Injectable()
 export class BookOwnershipsRepositoryMemoryAdapter extends BookOwnershipsRepository {
@@ -24,7 +25,7 @@ export class BookOwnershipsRepositoryMemoryAdapter extends BookOwnershipsReposit
     return bookOwnership;
   }
 
-  async update(username: string, bookId: string, payload: BookOwnership): Promise<void> {
+  async update(username: string, bookId: string, payload: UpdateBookOwnershipDto): Promise<void> {
     this.bookOwnerships = this.bookOwnerships.map((bookOwnership) => {
       if (bookOwnership.username === username && bookOwnership.bookId === bookId) {
         return Object.assign(bookOwnership, payload);
