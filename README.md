@@ -31,4 +31,37 @@ You can also get informations about books that were published but that you don't
 - [X] Signed books
 - [ ] Missing books from books series
 - [ ] Favorites books
-- [ ] Subscribe to related news about peculiar book
+- [ ] Subscribe to related news about peculiar 
+
+## 👨‍💻Tech
+- [MongoDB](https://www.mongodb.com/fr)
+- [NestJs](https://nestjs.com/)
+- [MySql](https://www.mysql.com/fr/)
+
+# 🐳  Installation and Run
+
+Just run the docker :
+```
+docker-compose up --build
+```
+
+The Swagger API definition is then available on http://localhost:3000/api/
+
+## Contributors
+
+Thanks to the following people who have contributed to this project:
+
+* [@Maxime Tran](https://github.com/MaxmeTrn/) 🔨
+* [@Gabriel Soudry](https://github.com/gabrielSoudry) 🔨
+* [@Jerome Petot](https://github.com/JeromePto) 🔨
+* [@Candice Rumeau](https://github.com/candylol17) 🔨
+* [@Amine Agoussal](https://github.com/AmineI) 🔨
+
+## Contact
+
+If you want to contact us you can reach us on GitHub
+
+## License
+
+This project uses the following license: No licence 🙂
+
