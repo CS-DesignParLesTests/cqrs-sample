@@ -30,12 +30,13 @@ export class BookRepositoryTypeOrmAdapter
       const createdBook: BookMongoDocument = new this.bookModel(element);
       await createdBook.save();
     }
+    return;
   }
 
   async findOneById(id: string): Promise<Book> {
-    // return this.booksRepository.findOne(id);
     const document: BookMongoDocument = await this.bookModel.findOne({ id: id }).exec();
     if (document === null) {
+      // doesn't correspond to output type, minor fix to do
       return undefined;
     } else {
       return new Book(document.toObject());
@@ -43,25 +44,6 @@ export class BookRepositoryTypeOrmAdapter
   }
 
   async findAll(): Promise<Book[]> {
-    // return this.booksRepository.find();
-
-    // Je crois que je me suis perdu, help pour reecrire avec async/await
-    // return new Promise((resolve, reject) => {
-    //   this.bookModel
-    //     .find({})
-    //     .exec()
-    //     .then((value: BookMongoDocument[]) => {
-    //       const tmp: Book[] = [];
-    //       for (let index = 0; index < value.length; index++) {
-    //         tmp[index] = new Book(value[index].toObject());
-    //       }
-    //       resolve(tmp);
-    //     })
-    //     .catch((error) => {
-    //       reject(error);
-    //     });
-    // });
-
     const documents: BookMongoDocument[] = await this.bookModel.find({}).exec();
     const output: Book[] = [];
     for (let index = 0; index < documents.length; index++) {
@@ -73,60 +55,45 @@ export class BookRepositoryTypeOrmAdapter
   private async handleCreateMongo(id: string): Promise<void> {
     const toWrite: Book = await this.booksRepository.findOne(id);
     const createdBook: BookMongoDocument = new this.bookModel(toWrite);
-    //? await or not for last ? or return ? or return await ?
     await createdBook.save();
+    return;
   }
 
   async create(id: string, payload: CreateBookDto): Promise<Book> {
-    const output: Promise<Book> = this.booksRepository.save({
+    const output: Book = await this.booksRepository.save({
       id,
       ...payload,
     });
-    //? Possible de reecrire avec async ???
-    output.then(async () => {
-      await this.handleCreateMongo(id);
-    });
+    this.handleCreateMongo(id);
     return output;
   }
 
   private async handleDeleteMongo(id: string): Promise<void> {
-    //? await or not ?
     await this.bookModel.deleteOne({ id: id });
+    return;
   }
 
   async delete(id: string): Promise<void> {
-    // The real type is Promise<DeleteResult>
-    //  not used to avoid useless import
-    //  and beacause the type is not relevant in this case
-    const output: Promise<any> = this.booksRepository.delete(id);
-    output.then(async () => {
-      await this.handleDeleteMongo(id);
-    });
-    //? ou juste 'return' ?
-    return output;
+    await this.booksRepository.delete(id);
+    this.handleDeleteMongo(id);
+    return;
   }
 
   private async handleUpdateMongo(id: string): Promise<void> {
-    const originalBook: Book = await this.booksRepository.findOne(id);
-    const documentBook: BookMongoDocument = await this.bookModel.findOne({ id: id }).exec();
+    const originalBookPromise: Promise<Book> = this.booksRepository.findOne(id);
+    const documentBookPromise: Promise<BookMongoDocument> = this.bookModel
+      .findOne({ id: id })
+      .exec();
+    const originalBook = await originalBookPromise;
+    const documentBook = await documentBookPromise;
     documentBook.set(originalBook);
-    //? await or not for last ? or return ? or return await ?
     await documentBook.save();
+    return;
   }
 
   async update(id: string, payload: UpdateBookDto): Promise<void> {
-    //? est ce que vous pensez que cette implemetation est mieux que celle de delete ?
-    return new Promise((resolve, reject) => {
-      const output: Promise<any> = this.booksRepository.update(id, payload);
-      output
-        .then(async () => {
-          resolve();
-          //? or this.handleUpdateMongo(id) sans async
-          await this.handleUpdateMongo(id);
-        })
-        .catch((error) => {
-          reject(error);
-        });
-    });
+    await this.booksRepository.update(id, payload);
+    this.handleUpdateMongo(id);
+    return;
   }
 }

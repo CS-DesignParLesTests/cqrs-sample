@@ -31,10 +31,10 @@ export class UsersRepositoryTypeOrmAdapter
       const createdUser: UserMongoDocument = new this.userModel(element);
       await createdUser.save();
     }
+    return;
   }
 
   async findOneByUsername(username: string): Promise<User | undefined> {
-    // return this.usersRepository.findOne(username);
     const document: UserMongoDocument = await this.userModel.findOne({ username: username }).exec();
     if (document === null) {
       return undefined;
@@ -44,7 +44,6 @@ export class UsersRepositoryTypeOrmAdapter
   }
 
   async findAll(): Promise<User[]> {
-    // return this.usersRepository.find();
     const documents: UserMongoDocument[] = await this.userModel.find({}).exec();
     const output: User[] = [];
     for (let index = 0; index < documents.length; index++) {
@@ -56,59 +55,42 @@ export class UsersRepositoryTypeOrmAdapter
   private async handleCreateMongo(username: string): Promise<void> {
     const toWrite: User = await this.usersRepository.findOne(username);
     const createdUser: UserMongoDocument = new this.userModel(toWrite);
-    //? await or not for last ? or return ? or return await ?
     await createdUser.save();
+    return;
   }
 
   async create(user: User): Promise<User> {
-    const output: Promise<User> = this.usersRepository.save(user);
-    output.then(async () => {
-      await this.handleCreateMongo(user.username);
-    });
+    const output: User = await this.usersRepository.save(user);
+    this.handleCreateMongo(user.username);
     return output;
   }
 
   private async handleUpdateMongo(username: string): Promise<void> {
-    const originalUser: User = await this.usersRepository.findOne(username);
-    const documentUser: UserMongoDocument = await this.userModel
+    const originalUserPromise: Promise<User> = this.usersRepository.findOne(username);
+    const documentUserPromise: Promise<UserMongoDocument> = this.userModel
       .findOne({ username: username })
       .exec();
+    const originalUser = await originalUserPromise;
+    const documentUser = await documentUserPromise;
     documentUser.set(originalUser);
-    //? await or not for last ? or return ? or return await ?
     await documentUser.save();
+    return;
   }
 
   async update(username: string, payload: UpdateUserDto): Promise<void> {
-    // await this.usersRepository.update(username, payload);
-    return new Promise((resolve, reject) => {
-      const output: Promise<any> = this.usersRepository.update(username, payload);
-      output
-        .then(async () => {
-          resolve();
-          //? or this.handleUpdateMongo(username) sans async
-          await this.handleUpdateMongo(username);
-        })
-        .catch((error) => {
-          reject(error);
-        });
-    });
+    await this.usersRepository.update(username, payload);
+    this.handleUpdateMongo(username);
+    return;
   }
+
   private async handleDeleteMongo(username: string): Promise<void> {
-    //? await or not ?
     await this.userModel.deleteOne({ username: username });
+    return;
   }
 
   async delete(username: string): Promise<void> {
-    // await this.usersRepository.delete(username);
-
-    // The real type is Promise<DeleteResult>
-    //  not used to avoid useless import
-    //  and beacause the type is not relevant in this case
-    const output: Promise<any> = this.usersRepository.delete(username);
-    output.then(async () => {
-      await this.handleDeleteMongo(username);
-    });
-    //? ou 'return output' ou pas de return ?
+    await this.usersRepository.delete(username);
+    this.handleDeleteMongo(username);
     return;
   }
 }
