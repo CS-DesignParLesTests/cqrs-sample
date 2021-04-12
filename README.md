@@ -31,7 +31,7 @@ You can also get informations about books that were published but that you don't
 - [X] Signed books
 - [ ] Missing books from books series
 - [ ] Favorites books
-- [ ] Subscribe to related news about peculiar 
+- [ ] Subscribe to related news about particular book
 
 ## 👨‍💻Tech
 - [MongoDB](https://www.mongodb.com/fr)
