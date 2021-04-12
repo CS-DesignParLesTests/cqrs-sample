@@ -8,7 +8,7 @@ import { UsersService } from '../users/users.service';
 import { BookOwnershipsService } from './book-ownerships.service';
 import { BookOwnershipsController } from './book-ownerships.controller';
 import { BookOwnershipsRepository } from './repositories/book-ownerships-repository';
-import { BookOwnershipsRepositoryMemoryAdapter } from './repositories/memory/book-ownerships-repository-memory.adapter';
+import { BookOwnershipsRepositoryTypeOrmAdapter } from './repositories/book-ownerships-repository-typeorm.adapter';
 import { QueryHandlers } from './queries/handlers';
 import { CommandHandlers } from './commands/handlers';
 import { BookOwnership } from './entities/book-ownership.entity';
@@ -22,7 +22,7 @@ import { BookOwnership } from './entities/book-ownership.entity';
     UsersService,
     {
       provide: BookOwnershipsRepository,
-      useClass: BookOwnershipsRepositoryMemoryAdapter,
+      useClass: BookOwnershipsRepositoryTypeOrmAdapter,
     },
     ...CommandHandlers,
     ...QueryHandlers,
