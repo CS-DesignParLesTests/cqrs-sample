@@ -30,19 +30,19 @@ export class BookOwnership extends AggregateRoot {
     description: 'Indicates whether the book has been bought or not by the user',
     type: 'boolean',
   })
-  @Column('boolean')
+  @Column()
   public isBought: boolean;
   @ApiProperty({
     description: `Indicates whether the user's book has been signed or not`,
     type: 'boolean',
   })
-  @Column('boolean')
+  @Column()
   public isSigned: boolean;
   @ApiProperty({
     description: `Indicates whether the user's book is lent or not`,
     type: 'boolean',
   })
-  @Column('boolean')
+  @Column()
   public isLent: boolean;
 
   @ApiProperty({
