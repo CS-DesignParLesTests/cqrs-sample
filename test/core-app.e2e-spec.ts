@@ -7,6 +7,8 @@ import { Book } from '../src/books/entities/book.entity';
 import { BookOwnership } from '../src/book-ownerships/entities/book-ownership.entity';
 import { User } from '../src/users/entities/user.entity';
 
+const timer = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
 describe('Core app', () => {
   let app: INestApplication;
   let connection: Connection;
@@ -37,6 +39,7 @@ describe('Core app', () => {
       expect(createdBook).toMatchObject(book);
       const bookId = createdBook.id;
 
+      await timer(1000); // Waiting for Consistency
       // GET one book by id
       const retrievedBook = await request(app.getHttpServer()).get(`/books/${bookId}`).expect(200);
       //Check return value
@@ -54,12 +57,14 @@ describe('Core app', () => {
         .send({ title: 'Strike The Blood !' })
         .expect(200);
 
+      await timer(1000); // Waiting for Consistency
+
       // GET the updated book by id
       const retrievedUpdatedBook = await request(app.getHttpServer())
         .get(`/books/${bookId}`)
         .expect(200);
       expect(retrievedUpdatedBook.body).toEqual(
-        Object.assign({}, createdBook, { title: 'Strike The Blood' }),
+        Object.assign({}, createdBook, { title: 'Strike The Blood !' }),
       );
 
       // DELETE posted book
@@ -95,6 +100,8 @@ describe('Core app', () => {
         .expect(201);
       expect(createdUser2).toMatchObject(user2);
 
+      await timer(1000); // Waiting for Consistency
+
       //GET Users
       const { body: users } = await request(app.getHttpServer())
         .get('/users')
@@ -117,7 +124,10 @@ describe('Core app', () => {
         .patch(`/users/${user2.username}`)
         .send({ displayName: 'BenoitSepe' })
         .expect(200);
-      //Check return value
+
+      await timer(1000); // Waiting for Consistency
+
+      //Check updated value
       const retrievedUpdatedUser = await request(app.getHttpServer())
         .get(`/users/${user2.username}`)
         .expect(200);
@@ -129,7 +139,8 @@ describe('Core app', () => {
       await request(app.getHttpServer()).delete(`/users/${user1.username}`).expect(200);
       await request(app.getHttpServer()).delete(`/users/${user2.username}`).expect(200);
 
-      //Check deletion
+      await timer(1000); // Waiting for Consistency
+
       const { body: finalUsers } = await request(app.getHttpServer()).get(`/users`).expect(200);
       expect(finalUsers).toEqual([]);
     });
