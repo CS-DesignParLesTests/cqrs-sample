@@ -1,0 +1,73 @@
+version: '3.8'
+
+services:
+  mysql_test:
+    container_name: demonestjs_test_mysql
+    profiles:
+      - test_e2e
+      - test_controller
+    build: mysqldatabase/test
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: nestjs
+      MYSQL_PASSWORD: nestjs
+      MYSQL_DATABASE: demonestjs
+    ports:
+      # Expose port 3308 on host machine in order to avoid collision with another MySQL instance running on host machine
+      - '3308:3306'
+    networks:
+      netwtestnestjs:
+        aliases:
+          - database
+
+  mongodb_test:
+    container_name: demonestjs_test_mongo
+    profiles:
+      - test_e2e
+      - test_controller
+    image: mongo:4.4
+    restart: always
+    environment:
+      - MONGODB_DATABASE="nest"
+    ports:
+      - 27018:27017
+    networks:
+      netwtestnestjs:
+        aliases:
+          - databasemongo
+
+  app_test_e2e:
+    container_name: demonest_test_e2e_app
+    profiles:
+      - test_e2e
+    build:
+      context: ./
+      dockerfile: test/Dockerfile
+      target: test_e2e
+    ports:
+      - '3001:3000'
+    networks:
+      - netwtestnestjs
+    depends_on:
+      - mysql_test
+      - mongodb_test
+
+  app_test_controller:
+    container_name: demonest_test_controller_app
+    profiles:
+      - test_controller
+    build:
+      context: ./
+      dockerfile: test/Dockerfile
+      target: test_controller
+    ports:
+      - '3002:3000'
+    networks:
+      - netwtestnestjs
+    depends_on:
+      - mysql_test
+      - mongodb_test
+
+networks:
+  netwtestnestjs:
